@@ -1,0 +1,150 @@
+html {
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#b1e088+0,35bcce+100 */
+	background: #b1e088; /* Old browsers */
+	background: -moz-linear-gradient(45deg,  #b1e088 0%, #35bcce 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#b1e088), color-stop(100%,#35bcce)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(45deg,  #b1e088 0%,#35bcce 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(45deg,  #b1e088 0%,#35bcce 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(45deg,  #b1e088 0%,#35bcce 100%); /* IE10+ */
+	background: linear-gradient(45deg,  #b1e088 0%,#35bcce 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b1e088', endColorstr='#35bcce',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+	height: 100%;	
+}
+
+body {
+
+	color: #FFF;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+}
+
+form {
+
+}
+
+.page-wrap {
+	margin: 0 auto;
+    width: 40%;
+}
+
+.media-item {
+	border-bottom: 2px solid #FFF;
+    clear: left;
+    color: #FFF;
+    margin: 0;
+    padding-right: 20px;
+    line-height: 2.4em;
+}
+
+.media-item:last-child {
+	margin-bottom: 20px;
+}
+
+.media-item .icon-move {
+    background: transparent url('../img/icon-move.png') 10px center no-repeat;
+    /*display: inline-block;*/
+    display: none;
+    height: 20px;
+    margin: 0 10px 0 0;
+    width: 30px;
+}
+
+.delete-item {
+    /*display: block;*/
+ 	margin: 10px;
+}
+
+/*#sortable {
+    margin: 0 0 40px;
+    padding-left: 20px;
+    list-style: none;
+}*/
+
+
+/*#sortable li {
+    padding: 0;
+}
+*/
+
+.dvd-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.move-icon {
+    cursor: pointer;
+    display: block;
+    float: left;
+    width: 30px;
+    height: 20px;
+    margin: 8px 5px;
+}
+
+.ui-sortable-helper {
+    opacity: .6;
+}
+
+.error-message {
+    background-color: red;
+    color: #FFF;
+    display: inline-block;
+    padding: 5px 15px;
+}
+
+.site-footer {
+	padding: 20px 0 80px;
+}
+
+fieldset {
+	border: 0;
+	margin-bottom: 20px;
+	padding: 0;
+}
+
+.delete-dvd-wrap {
+	display: inline-block;
+	float: right;
+	padding-right: 10px;
+}
+
+input[type="submit"] {
+	background-color: transparent;
+	border: 2px solid #FFF;
+	border-radius: 5px;
+	color: #FFF;
+	display: block;
+	font-size: 18px;
+	float: right;
+	margin-bottom: 20px;
+	padding: 10px;
+	text-transform: uppercase;
+	width: 100%;
+}
+
+input[type="submit"]:hover {
+	background-color: #FFF;
+	color: #35BCCE;
+}
+
+input[type="text"],
+input[type="password"].
+input[type="email"],
+input[type="number"] {
+	background: transparent;
+	border: 2px solid #FFF;
+	color: #FFF;
+	padding: 5px;
+	line-height: 2.5em;
+}
+
+.site-credit {
+	font-size: 10px;
+	text-transform: uppercase;
+	color: #35BCCE;
+	font-weight: bold;
+	border-radius: 5px;
+	background-color: #FFF;
+	text-decoration: none;
+	padding: 3px 6px;
+}
