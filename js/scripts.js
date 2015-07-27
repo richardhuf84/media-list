@@ -12,65 +12,82 @@ $(document).ready(function() {
 
 	// }
 
-	$('.media-item').each(function(i) {
-		// dvd title to query OMDB with
+	// $('.media-item').each(function(e) {
+	// 	// dvd title to query OMDB with
+	// 	var dvdTitle = $(this).find('.media-item-title').text();
+	// 	// make lowecase
+	// 	dvdTitle = dvdTitle.toLowerCase();
+	// 	// replace and spaces with +
+	// 	dvdTitle = dvdTitle.split(' ').join('+');
+
+	// 	console.log(dvdTitle);
+
+	// 	// create a variable for this, so we can use it inside a loop later
+	// 	$this = $(this);
+
+	// 	var jqxhr = $.getJSON('http://www.omdbapi.com/?t=' + dvdTitle + '&y=&plot=long&r=json', function(data) {
+
+	// 	}).done(function(data) {
+	// 		console.log(data['Plot']);
+	// 	});
+
+	// });
+
+	dvdTitleArray = [];
+	mediaItem = $('.media-item');
+	$('.media-item').each(function() {
+		// 	// dvd title to query OMDB with
 		var dvdTitle = $(this).find('.media-item-title').text();
 		// make lowecase
 		dvdTitle = dvdTitle.toLowerCase();
 		// replace and spaces with +
 		dvdTitle = dvdTitle.split(' ').join('+');
-
 		// console.log(dvdTitle);
 
-		$.getJSON('http://www.omdbapi.com/?t=' + dvdTitle + '&y=&plot=long&r=json', function(data) {
-			// var items = [];
+		// create a variable for this, so we can use it inside a loop later
+		$this = $(this);
 
-			console.log(data);
-			// console.log(i + 1);
-			// $('.media-item-desc:nth-child(' + i + ')').html(data['Plot']);
-			$('.media-item-desc:nth-child(' + (i + 1) + ')').text(data['Plot']);
-
-			// console.log(this);
-
-			// console.log(data);
-			// $.each( data, function( key, val ) {
-			//     items.push( "<p id='" + key + "'>" + val + "</p>" );
-  	// 		});
-
-			// console.log(items);
-			// console.log(this);		
-		
-			// $(this).find('.media-item-desc').append(items[9]);
-
-			// console.log(data);
-
-			// $( "<ul/>", {
-			//     "class": "my-new-list",
-     		//	html: items.join( "" )
-  	 		//	}).appendTo( "body" );
-			// });
-
-			// console.log(dvdCount);
-
-			// $('.media-item-desc').each(function(e) {
-				// console.log(this.length);
-				// $(this).html(items[9]);
-				// console.log(items);
-				// for (var i = 0; i < dvdCount; i++) {
-
-				// }
-
-			// });
-
-		});
-
+		dvdTitleArray.push(dvdTitle);
 	});
+
+	for (var i = 0; i < dvdCount; i++) {
+		// $.getJSON('http://www.omdbapi.com/?t=' + dvdTitleArray[i] + '&y=&plot=long&r=json', function(data){
+		// currentTitle = dvdTitleArray[2];
+		// console.log(i);
+		// console.log(currentTitle);
+		// });
+		// }).done(function(data) {
+
+			// if(('.media-item-desc').text() !== "") {
+			// $this.find('.media-item-desc.empty').first().text(data['Plot']).removeClass('empty');
+			// console.log(data['Plot']);
+			// }
+		// });
+	}
+
+	// function getPlot(dvdTitle) {
+	// 	OMDBTitle = dvdTitle.toLowerCase();
+	// 	// replace and spaces with +
+	// 	OMDBTitle = OMDBTitle.split(' ').join('+');
+	// 	// console.log(dvdTitle);
+
+	// 	$.getJSON('http://www.omdbapi.com/?t=' + OMDBTitle + '&y=&plot=long&r=json', function(data){
+	// 		return (data[9]);
+	// 	});
+	// }
+
+	// var itemPlot = getPlot('The Matrix');
+
+	// console.log(itemPlot);
+
+	// });
+
+	$.getJSON('http://www.omdbapi.com/?t=' + dvdTitle + '&y=&plot=long&r=json', function(data) {
+
+	}).done(function(data) {
+		console.log(data['Plot']);
+	});
+
+	// console.log(dvdTitleArray);
+
 });
-
-
-
-////
-
-// $.get("demo_test.asp", function(data, status){
-// 		alert("Data: " + data + "\nStatus: " + status);
-//   });

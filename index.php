@@ -149,7 +149,7 @@
                     print "
                         <li id='dvd-" . $dvdID . "' class='media-item'>
                             <span class='icon-move'></span>
-                            <span class='media-item-title'>" . $dvdTitle . "</span> - <span class='media-item-year'>" . $dvdYear . "</span> <span class='media-item-desc-toggle'>Description</span><div class='delete-dvd-wrap'><input type='checkbox' name='" . $dvdID . "' class='delete-item' id='" . $dvdID . "' ><label for='" . $dvdID . "'>Delete</label></div><div class='media-item-desc'></div></li>";
+                            <span class='media-item-title'>" . $dvdTitle . "</span> - <span class='media-item-year'>" . $dvdYear . "</span> <span class='media-item-desc-toggle'>Description</span><div class='delete-dvd-wrap'><input type='checkbox' name='" . $dvdID . "' class='delete-item' id='" . $dvdID . "' ><label for='" . $dvdID . "'>Delete</label></div><div class='media-item-desc empty'></div></li>";
                 }
                 ?>
             </ul>
