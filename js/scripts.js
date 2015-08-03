@@ -6,7 +6,7 @@ $(document).ready(function() {
 	$('.icon-move').hide();
 
 	// Loop through each dvd title and get the description from OMDB
-	var dvdCount = $('.media-item').length;
+	// var dvdCount = $('.media-item').length;
 	// console.log(dvdCount);
 	// for(var i = 0; i < dvdCount; i++) {
 
@@ -50,7 +50,56 @@ $(document).ready(function() {
 		dvdTitleArray.push(dvdTitle);
 	});
 
-	for (var i = 0; i < dvdCount; i++) {
+	// for (var i = 1; i < dvdTitleArray.length; i++) {
+	for (var i in dvdTitleArray) {
+		descDiv = $('.media-item:nth-child(' + i + ')').find('.media-item-desc');
+		// arrayItem = dvdTitleArray[i]; 
+		// console.log(arrayItem);
+
+		// dvdAJAX = $.getJSON('http://www.omdbapi.com/?t=' + dvdTitleArray[i] + '&y=&plot=long&r=json', function(data){
+		// 	// console.log(descDiv);
+		// 	// descDiv.text(data);
+			
+		// 	// var items = [];
+		// 	// $.each( data, function( key, val ) {
+		//  //    	items.push( "<p id='" + key + "'>" + val + "</p>" );
+  // 	// 		});
+		// 	// console.log(items);
+		
+		// 	// descDiv.text(items[9]);
+		// 	return(data.Title);
+
+
+		// });
+		// document.write(dvdAJAX);
+
+
+		// function getImage(dvdTitleArray) { 
+		// $.ajax({ 
+		//     type: "GET",
+		//     dataType: "json",
+		//     url: "http://www.omdbapi.com/?t=" + dvdTitleArray,
+		//     success: function(data){
+		//         return $.get(data.Plot); 
+		//     },
+		//     async:false,
+		//     error: function() {
+		//         return "Image not found.";
+		//     }
+		// });
+		// }
+
+		// getImage(dvdTitleArray[i]);
+
+		// dvdData = JSON.parse(dvdAJAX);
+
+		// dvdAJAX = dvdAJAX[i]['Title'];
+
+		// dvdAJAX = dvdAJAX.responseText.makeArray();
+
+		// console.log(dvdAJAX);
+		// descDiv.text(dvdAJAX);
+
 		// $.getJSON('http://www.omdbapi.com/?t=' + dvdTitleArray[i] + '&y=&plot=long&r=json', function(data){
 		// currentTitle = dvdTitleArray[2];
 		// console.log(i);
@@ -82,12 +131,26 @@ $(document).ready(function() {
 
 	// });
 
-	$.getJSON('http://www.omdbapi.com/?t=' + dvdTitle + '&y=&plot=long&r=json', function(data) {
+	// $.getJSON('http://www.omdbapi.com/?t=' + dvdTitle + '&y=&plot=long&r=json', function(data) {
 
-	}).done(function(data) {
-		console.log(data['Plot']);
-	});
+	// }).done(function(data) {
+	// 	console.log(data['Plot']);
+	// });
 
 	// console.log(dvdTitleArray);
+
+	$('.media-item-detail-toggle').click(function(e) {
+		e.preventDefault();
+		$(this).parent().next().slideToggle(300);
+	});
+
+	$('.error-message-close').click(function() {
+		$(this).parent().fadeOut();
+	});
+
+	// if media-item-detail is empty, hide detail button
+	// if ($('.media-item-detail-poster').length == 0 || $('.media-item-detail-plot').length == 0) {
+		// console.log('details are empty');
+	//}
 
 });
