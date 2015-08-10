@@ -23,18 +23,24 @@
     <!-- Normalise -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css" rel="stylesheet" type="text/css">
 
+    <!-- JQuery UI CSS -->
+    <link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" />
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
     <!-- Main stylesheet -->
     <link href='css/style.css' rel='stylesheet' type='text/css'>
 
-    <!-- Scripts -->
+    <!-- Jquery -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <!-- <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script> -->
+
+    <!-- Jquery UI -->
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
     
     <!-- Main js file -->
     <script src="js/scripts.js"></script>
+    <script src="js/jquery.autocomplete.js"></script>
 
     <!--[if lt IE 9]>
         <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -142,6 +148,21 @@
             </ul>
         </nav> -->
     </header>
+
+<!--     ==========================
+
+    <div class="ui-widget">
+        <label for="movies">Movie Search: </label>
+        <input id="movies" type="text">
+    </div>
+ 
+    <div class="ui-widget">
+        Result:
+        <div id="log" style="height: 200px; width: 300px; overflow: auto;" class="ui-widget-content"></div>
+    </div>
+
+    ==========================
+ -->
  
     <section class="page-wrap">
         <?php if (isset($errorMessage) && !empty($errorMessage)) {

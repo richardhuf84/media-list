@@ -139,14 +139,20 @@ $(document).ready(function() {
 
 	// console.log(dvdTitleArray);
 
+	// Toggle media item details
 	$('.media-item-detail-toggle').click(function(e) {
 		e.preventDefault();
 		$(this).parent().next().slideToggle(300);
 	});
 
+	// Error message close
 	$('.error-message-close').click(function() {
 		$(this).parent().fadeOut();
 	});
+
+  });
+
+
 
 	// if media-item-detail is empty, hide detail button
 	// if ($('.media-item-detail-poster').length == 0 || $('.media-item-detail-plot').length == 0) {
