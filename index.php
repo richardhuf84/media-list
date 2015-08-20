@@ -23,28 +23,25 @@
     <!-- Normalise -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css" rel="stylesheet" type="text/css">
 
-    <!-- JQuery UI CSS -->
-    <!--<link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" />-->
-
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
     <!-- Main stylesheet -->
     <link href='css/style.css' rel='stylesheet' type='text/css'>
 
-    <!-- Jquery -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-
-    <!-- Jquery UI -->
-    <!--<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>-->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     
     <!-- Main js file -->
     <script src="js/scripts.js"></script>
+    <!--<script src="js/jquery.autocomplete.js"></script>-->
 
     <!--[if lt IE 9]>
         <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
         <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
 
 </head>
 <body>
@@ -113,6 +110,7 @@
         // }
 
         // DELETE
+        print_r($_POST['delete']);
         foreach($_POST['delete'] as $key => $value) {
             $sqlDelete = "DELETE from dvds WHERE id = $key";
             $db->exec($sqlDelete);
@@ -133,16 +131,34 @@
 
     $DVDS = ($results->fetchAll(PDO::FETCH_ASSOC));
 
+    // if($_SERVER["REQUEST_METHOD"] = "POST" && $_POST['dvd-delete-'])
+
+
     ?>
 
     <header class="site-header">
-        <h1 class="site-logo">Ali & Rich's DVD List</h1>
+        <h1 class="site-logo">Media List</h1>
 <!--         <nav class="site-nav">
             <ul class="site-nav-ul">
                 <li>DVD's</li>
             </ul>
         </nav> -->
     </header>
+
+<!--     ==========================
+
+    <div class="ui-widget">
+        <label for="movies">Movie Search: </label>
+        <input id="movies" type="text">
+    </div>
+ 
+    <div class="ui-widget">
+        Result:
+        <div id="log" style="height: 200px; width: 300px; overflow: auto;" class="ui-widget-content"></div>
+    </div>
+
+    ==========================
+ -->
  
     <section class="page-wrap">
         <?php if (isset($errorMessage) && !empty($errorMessage)) {
@@ -153,7 +169,7 @@
             <fieldset class="fieldset-add-title">
                 <div class="field-dvd-title">
                     <label class="label-dvd-title" for="dvd-title">DVD Title</label>
-                    <input type="text" name="dvd-title" id="dvd-title" autocomplete="off">
+                    <input type="text" name="dvd-title" id="dvd-title" autofocus autocomplete="off">
                 </div>
                 <div class="field-dvd-year">
                     <label class="label-dvd-year" for="dvd-year">Year of release</label>
@@ -167,6 +183,8 @@
                             print "<option value='" . $previousYear . "'>" . $previousYear . "</option>";                
                     } ?>
                     </select>
+                </div>
+                <div class="suggestion">
                 </div>
                 <button type="submit" name="add" value="add"><i class="fa fa-plus-circle">Add</i></button>
             </fieldset>        
@@ -210,6 +228,9 @@
                 <?php } ?>
             </ul>
             <button type="submit" name="delete" class="submit-delete"><i class="fa fa-trash-o"></i>Delete</button>
+            <div class="total-count">
+                <p><strong>Total:</strong> <?php print count($DVDS); ?></p>
+            </div>
         </form>
 
         <footer class="site-footer">

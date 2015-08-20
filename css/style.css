@@ -138,14 +138,8 @@ fieldset {
 	padding: 0;
 }
 
-.field-dvd-title,
 .field-dvd-year {
-	display: inline-block;
-	vertical-align: top;
-}
-
-.field-dvd-year {
-	padding-left: 20px;
+	display: none;
 }
 
 .label-dvd-title,
@@ -158,7 +152,7 @@ fieldset {
 }
 
 [id="dvd-title"] {
-	min-width: 240px;
+	width: 100%;
 }
 
 .delete-dvd-wrap {
@@ -195,11 +189,12 @@ input[type="text"],
 input[type="password"],
 input[type="email"],
 input[type="number"] {
-	background: transparent;
+	background: #FFF;
 	border: 2px solid #FFF;
 	border-radius: 5px;
-	color: #FFF;
+	color: #35BCCE;
 	font-size: 14px;
+	font-weight: bold;
 	padding: 5px 10px;
 	line-height: 2em;
 }
@@ -263,9 +258,27 @@ input[type="number"]:focus {
 	float: right;
 }
 
+.suggestion-poster {
+	float: left;
+	height: auto;
+	margin: 0 20px 10px 0;
+	width: 120px;
+}
+
 [value="add"] {
-	display: inline-block;
-	float: right;
+	background-color: #35BCCE;
+	border: none;
+	color: #FFF;
+	width: 100%;
+}
+
+[value="add"]:hover {
+	color: #35BCCE;
+	background-color: #FFF;
+}
+
+.total-count {
+	/*float: right;*/
 }
 
 button {
