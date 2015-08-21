@@ -1,28 +1,27 @@
 $(document).ready(function() {
 
-	// 	$.getJSON('http://www.omdbapi.com/?t=' + OMDBTitle + '&y=&plot=long&r=json', function(data){
-	// 		return (data[9]);
-	// 	});
-
-	
-
-	// var jqxhr = $.getJSON('http://www.omdbapi.com/?t=' + dvdTitle + '&y=&plot=long&r=json', function(data) {
-
-	// }).done(function(data) {
-	// 	console.log(data['Plot']);
-	// });
+	var searchField 		= $('#dvd-title'); 
+	var yearField 			= $('#dvd-year');
+	var typingTimer;                //timer identifier
+	var doneTypingInterval = 3000;  //time in ms, 3 second for example
 
 	// Search OMDB for title 
-	$('#dvd-title').blur(function() {
-		var searchTitle = $('#dvd-title').val();		
-		var jqxhr = $.getJSON('http://www.omdbapi.com/?t=' + searchTitle + '&type=movie', function(data) {
+	function omdbAjaxCall() {
+		var jqxhr = $.getJSON('http://www.omdbapi.com/?t=' + searchField.val() + '&type=movie', function(data) {
+		
 		}).done(function(data) {
-			console.log(data['Title']);
+			
+			// if search result is undefined, give error message
+			if(searchField.val() !== '' && typeof data['Title'] == 'undefined') {
+				// alert('please refine search');
+				$('.suggestion').html('<p>No results found. Please refine your search terms.</p>');
+			}
+
 			// Set value of search field to returned title
-			$('#dvd-title').val(data['Title']);
-			// set value f yeaar select to returned year
-			$('#dvd-year').val(data['Year']);
-			// Set poster img for suggestion title
+			searchField.val(data['Title']);
+
+			// set value of yeaar select to returned year
+			yearField.val(data['Year']);
 
 			// Populate suggestion item content
 			if(typeof data['Title'] !== 'undefined') {
@@ -32,51 +31,34 @@ $(document).ready(function() {
 				suggestionItemHTML += '<p class="suggestion-year">' + data['Year'] + '</p>';
 				suggestionItemHTML += '<p class="suggestion-plot">' + data['Plot'] + '</p>';
 
-				console.log(suggestionItemHTML);
 				$('.suggestion').html(suggestionItemHTML);
 			} 
 
-			if($('#dvd-title').val() === '') {
-				$('.suggestion').html('');
-			}
 		});
+	}	
+
+	// Start ajax call after user stops typing for a few seconds
+	//on keyup, start the countdown
+	searchField.on('keyup', function () {
+	  clearTimeout(typingTimer);
+	  typingTimer = setTimeout(doneTyping, doneTypingInterval);
 	});
 
-	// $('#dvd-title').autocomplete({
-	// 	source: function( request, response ) {
- //        $.ajax({
- //          url: 'http://www.omdbapi.com/?t=',
- //          dataType: "jsonp",
- //          data: {
- //            q: request.term
- //          },
- //          success: function( data ) {
- //            response( data );
- //          }
- //        });
- //      },
- //      minLength: 3,
- //      select: function( event, ui ) {
- //        log( ui.item ?
- //          "Selected: " + ui.item.label :
- //          "Nothing selected, input was " + this.value);
- //      },
- //      open: function() {
- //        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
- //      },
- //      close: function() {
- //        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
- //      }
-	// });
-	
+	//on keydown, clear the countdown 
+	searchField.on('keydown', function () {
+	  clearTimeout(typingTimer);
+	});
+
+	//user is "finished typing," do something
+	function doneTyping () {
+		console.log('done typing');
+	  	omdbAjaxCall();
+	}
 
 	// Toggle media item details
 	$('.media-item-detail-toggle').click(function(e) {
 		e.preventDefault();
 		$(this).parent().next().slideToggle(300);
-
-		// // window.setTimeout(2000);
-		// $(this).parent().next().find('.media-item-poster-img').toggle();
 	});
 
 	// Error message close

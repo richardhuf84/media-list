@@ -8,7 +8,7 @@
 
     <!-- Meta -->
     <meta charset="utf-8">
-    <title>Media List - Ali & Rich</title>
+    <title>Media List</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="yes" name="apple-mobile-web-app-capable">
@@ -62,62 +62,73 @@
     // If request method is post, insert dvd title into the database
     if ($_SERVER["REQUEST_METHOD"] == 'POST') {
 
-        if ($_POST['dvd-title'] && $_POST['dvd-year']) {
+        // echo "REQUEST METHOD = POST";
+        // echo "<pre>";
+        // print_r($_POST);
+        // echo "</pre>";
 
-            // Trim whitespace from title
-            $dvdTitle   = trim($_POST["dvd-title"]);
-            // Sanitize input
-            $dvdTitle   = filter_var($dvdTitle, FILTER_SANITIZE_STRING);
-            // Encode title as url
-            $urlEncodedTitle = urlencode($dvdTitle);
+        if ($_POST['update'] == 'add') {
+            if ($_POST['dvd-title'] && $_POST['dvd-year']) {
 
-            // DVD Year
-            $dvdYear    = $_POST["dvd-year"];
+                // Trim whitespace from title
+                $dvdTitle   = trim($_POST["dvd-title"]);
+                // Sanitize input
+                $dvdTitle   = filter_var($dvdTitle, FILTER_SANITIZE_STRING);
+                // Encode title as url
+                $urlEncodedTitle = urlencode($dvdTitle);
 
-            // JSON call
-            $json=file_get_contents("http://www.omdbapi.com/?t=$urlEncodedTitle&y=$dvdYear");
-            // print_r($json);
+                // DVD Year
+                $dvdYear    = $_POST["dvd-year"];
 
-            $details=json_decode($json);
+                // JSON call
+                $json=file_get_contents("http://www.omdbapi.com/?t=$urlEncodedTitle&y=$dvdYear");
 
-            if($details->Response=='True') {   
-                $dvdIMDBID     = $details->imdbID;
-                $dvdPoster     = $details->Poster;
-                $dvdDirector   = $details->Director;
-                $dvdWriter     = $details->Writer;
-                $dvdActors     = $details->Actors;
-                $dvdPlot       = $details->Plot;
-                $dvdIMDBRating = $details->imdbRating;
-                // "Title : ".$details->Title.';
-                // "Year : ".$details->Year.';
-                // "Rated : ".$details->Rated.';
-                // "Runtime : ".$details->Runtime.';
-                // "Genre : ".$details->Genre.';
-                // "Language : ".$details->Language.';
-                // "Country : ".$details->Country.';
-                // "Awards : ".$details->Awards.';
-                // "Metascore : ".$details->Metascore.';
-                // "IMDB Votes : ".$details->imdbVotes.';
+                $details=json_decode($json);
+
+                if($details->Response=='True') {   
+                    $dvdIMDBID     = $details->imdbID;
+                    $dvdPoster     = $details->Poster;
+                    $dvdDirector   = $details->Director;
+                    $dvdWriter     = $details->Writer;
+                    $dvdActors     = $details->Actors;
+                    $dvdPlot       = $details->Plot;
+                    $dvdIMDBRating = $details->imdbRating;
+                    // "Title : ".$details->Title.';
+                    // "Year : ".$details->Year.';
+                    // "Rated : ".$details->Rated.';
+                    // "Runtime : ".$details->Runtime.';
+                    // "Genre : ".$details->Genre.';
+                    // "Language : ".$details->Language.';
+                    // "Country : ".$details->Country.';
+                    // "Awards : ".$details->Awards.';
+                    // "Metascore : ".$details->Metascore.';
+                    // "IMDB Votes : ".$details->imdbVotes.';
+                }
+
+                // Insert new dvd item POST values into the database
+                $sqlInsert = "INSERT INTO dvds(imdbid, title, year, plot, posterURL, director) VALUES(
+                    '" . $dvdIMDBID . "',
+                    '" . $dvdTitle . "',
+                    '" . $dvdYear . "',
+                    '" . $dvdPlot . "',
+                    '" . $dvdPoster . "',
+                    '" . $dvdDirector . "')";
+                $db->exec($sqlInsert);
+
             }
 
-            // Insert new dvd item POST values into the database
-            $sqlInsert = "INSERT INTO dvds(title, year, plot, posterURL, director) VALUES('" . $dvdTitle . "','" . $dvdYear . "','" . $dvdPlot . "','" . $dvdPoster . "','" . $dvdDirector . "')";
-            $db->exec($sqlInsert);
-
-
-        } // else {
-            // $errorMessage = "You must specify a title and year";    
-        // }
+            // Unset $_POST so page refresh won't submit the data again
+            unset($_POST);
+    
+        }
 
         // DELETE
-        print_r($_POST['delete']);
-        foreach($_POST['delete'] as $key => $value) {
-            $sqlDelete = "DELETE from dvds WHERE id = $key";
-            $db->exec($sqlDelete);
-        }    
-
-        // Unset $_POST so page refresh won't submit the data again
-        unset($_POST);
+        if($_POST['update'] == 'delete') {
+            foreach($_POST['delete'] as $key => $value) {
+                $sqlDelete = "DELETE from dvds WHERE id = $key";
+                $db->exec($sqlDelete);
+            }    
+        }
     }
 
     // READ
@@ -131,34 +142,11 @@
 
     $DVDS = ($results->fetchAll(PDO::FETCH_ASSOC));
 
-    // if($_SERVER["REQUEST_METHOD"] = "POST" && $_POST['dvd-delete-'])
-
-
     ?>
 
     <header class="site-header">
         <h1 class="site-logo">Media List</h1>
-<!--         <nav class="site-nav">
-            <ul class="site-nav-ul">
-                <li>DVD's</li>
-            </ul>
-        </nav> -->
     </header>
-
-<!--     ==========================
-
-    <div class="ui-widget">
-        <label for="movies">Movie Search: </label>
-        <input id="movies" type="text">
-    </div>
- 
-    <div class="ui-widget">
-        Result:
-        <div id="log" style="height: 200px; width: 300px; overflow: auto;" class="ui-widget-content"></div>
-    </div>
-
-    ==========================
- -->
  
     <section class="page-wrap">
         <?php if (isset($errorMessage) && !empty($errorMessage)) {
@@ -186,7 +174,7 @@
                 </div>
                 <div class="suggestion">
                 </div>
-                <button type="submit" name="add" value="add"><i class="fa fa-plus-circle">Add</i></button>
+                <button type="submit" name="update" value="add"><i class="fa fa-plus-circle">Add</i></button>
             </fieldset>        
             <ul class="dvd-list">
                 <?php
@@ -227,7 +215,7 @@
                         </li>
                 <?php } ?>
             </ul>
-            <button type="submit" name="delete" class="submit-delete"><i class="fa fa-trash-o"></i>Delete</button>
+            <button type="submit" name="update" value="delete" class="submit-delete"><i class="fa fa-trash-o"></i>Delete</button>
             <div class="total-count">
                 <p><strong>Total:</strong> <?php print count($DVDS); ?></p>
             </div>
