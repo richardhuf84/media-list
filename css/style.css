@@ -250,8 +250,9 @@ input[type="number"]:focus {
 	width: 65%;
 }
 
-.media-item-plot p {
-	line-height: 1.5em;
+.media-item-detail-meta * {
+	font-size: 14px;
+	line-height: 1.3em;
 }
 
 .submit-delete {
@@ -302,4 +303,9 @@ button:hover {
 button i {
 	display: inline-block;
 	margin-right: 5px;
+}
+
+.hidden {
+	display: none;
+	visibility: hidden;
 }

@@ -1,153 +1,5 @@
-<!doctype html>
-<!--[if lt IE 7 ]><html itemscope itemtype="http://schema.org/Product" id="ie6" class="ie ie-old" lang="en-US" prefix="og: http://ogp.me/ns#"><![endif]-->
-<!--[if IE 7 ]>   <html itemscope itemtype="http://schema.org/Product" id="ie7" class="ie ie-old" lang="en-US" prefix="og: http://ogp.me/ns#"><![endif]-->
-<!--[if IE 8 ]>   <html itemscope itemtype="http://schema.org/Product" id="ie8" class="ie ie-old" lang="en-US" prefix="og: http://ogp.me/ns#"><![endif]-->
-<!--[if IE 9 ]>   <html itemscope itemtype="http://schema.org/Product" id="ie9" class="ie" lang="en-US" prefix="og: http://ogp.me/ns#"><![endif]-->
-<!--[if gt IE 9]><!--><html itemscope itemtype="http://schema.org/Product" lang="en-US" prefix="og: http://ogp.me/ns#"><!--<![endif]-->
-<head>
+<?php include('includes/header.php'); ?>
 
-    <!-- Meta -->
-    <meta charset="utf-8">
-    <title>Media List</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="yes" name="apple-mobile-web-app-capable">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
-    <!-- Favicons -->
-    <link rel="shortcut icon" sizes="16x16 24x24 32x32 48x48 64x64" href="http://scotch.io/favicon.ico">
-
-    <!-- Open Sans -->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
-
-    <!-- Normalise -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css" rel="stylesheet" type="text/css">
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-
-    <!-- Main stylesheet -->
-    <link href='css/style.css' rel='stylesheet' type='text/css'>
-
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    
-    <!-- Main js file -->
-    <script src="js/scripts.js"></script>
-    <!--<script src="js/jquery.autocomplete.js"></script>-->
-
-    <!--[if lt IE 9]>
-        <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-        <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-
-</head>
-<body>
-
-    <?php
- 
-    // Try to connect to the database
-    try {
-        $db = new PDO("mysql:host=localhost;dbname=media;port=8889","root","root");
-        $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-        $db->exec("SET NAMES 'utf8'");
-    } catch (Exception $e) {
-        echo "Could not connect to database";
-        exit;
-    }
-
-    // CREATE
-    // If request method is post, insert dvd title into the database
-    if ($_SERVER["REQUEST_METHOD"] == 'POST') {
-
-        // echo "REQUEST METHOD = POST";
-        // echo "<pre>";
-        // print_r($_POST);
-        // echo "</pre>";
-
-        if ($_POST['update'] == 'add') {
-            if ($_POST['dvd-title'] && $_POST['dvd-year']) {
-
-                // Trim whitespace from title
-                $dvdTitle   = trim($_POST["dvd-title"]);
-                // Sanitize input
-                $dvdTitle   = filter_var($dvdTitle, FILTER_SANITIZE_STRING);
-                // Encode title as url
-                $urlEncodedTitle = urlencode($dvdTitle);
-
-                // DVD Year
-                $dvdYear    = $_POST["dvd-year"];
-
-                // JSON call
-                $json=file_get_contents("http://www.omdbapi.com/?t=$urlEncodedTitle&y=$dvdYear");
-
-                $details=json_decode($json);
-
-                if($details->Response=='True') {   
-                    $dvdIMDBID     = $details->imdbID;
-                    $dvdPoster     = $details->Poster;
-                    $dvdDirector   = $details->Director;
-                    $dvdWriter     = $details->Writer;
-                    $dvdActors     = $details->Actors;
-                    $dvdPlot       = $details->Plot;
-                    $dvdIMDBRating = $details->imdbRating;
-                    // "Title : ".$details->Title.';
-                    // "Year : ".$details->Year.';
-                    // "Rated : ".$details->Rated.';
-                    // "Runtime : ".$details->Runtime.';
-                    // "Genre : ".$details->Genre.';
-                    // "Language : ".$details->Language.';
-                    // "Country : ".$details->Country.';
-                    // "Awards : ".$details->Awards.';
-                    // "Metascore : ".$details->Metascore.';
-                    // "IMDB Votes : ".$details->imdbVotes.';
-                }
-
-                // Insert new dvd item POST values into the database
-                $sqlInsert = "INSERT INTO dvds(imdbid, title, year, plot, posterURL, director) VALUES(
-                    '" . $dvdIMDBID . "',
-                    '" . $dvdTitle . "',
-                    '" . $dvdYear . "',
-                    '" . $dvdPlot . "',
-                    '" . $dvdPoster . "',
-                    '" . $dvdDirector . "')";
-                $db->exec($sqlInsert);
-
-            }
-
-            // Unset $_POST so page refresh won't submit the data again
-            unset($_POST);
-    
-        }
-
-        // DELETE
-        if($_POST['update'] == 'delete') {
-            foreach($_POST['delete'] as $key => $value) {
-                $sqlDelete = "DELETE from dvds WHERE id = $key";
-                $db->exec($sqlDelete);
-            }    
-        }
-    }
-
-    // READ
-    // Get list of dvd's from dvds table ordered by id asc
-    try {
-        $results = $db->query("SELECT id, title, year, plot, posterURL, director FROM dvds ORDER BY id DESC");
-    } catch (Exception $e){
-        echo "Data could not be retrieved from the database.";
-        exit;
-    }
-
-    $DVDS = ($results->fetchAll(PDO::FETCH_ASSOC));
-
-    ?>
-
-    <header class="site-header">
-        <h1 class="site-logo">Media List</h1>
-    </header>
- 
     <section class="page-wrap">
         <?php if (isset($errorMessage) && !empty($errorMessage)) {
             print "<p class='error-message'>$errorMessage <span class='error-message-close'>X</span></p>"; 
@@ -163,15 +15,11 @@
                     <label class="label-dvd-year" for="dvd-year">Year of release</label>
                     <select id="dvd-year" name="dvd-year">            
                         <option value="">Please select</option>
-                        <?php 
-                        $currentYear = date("Y");
+                        <?php generateYearOptions(50) ?>
 
-                        for ($i = 0; $i < 70; $i++) {
-                            $previousYear = $currentYear - $i;
-                            print "<option value='" . $previousYear . "'>" . $previousYear . "</option>";                
-                    } ?>
                     </select>
                 </div>
+                <input type="text" name="dvd-imdbid" id="dvd-imdbid" class="hidden">
                 <div class="suggestion">
                 </div>
                 <button type="submit" name="update" value="add"><i class="fa fa-plus-circle">Add</i></button>
@@ -185,6 +33,7 @@
                     $dvdPlot        = $DVD['plot'];
                     $dvdPoster      = $DVD['posterURL'];
                     $dvdDirector    = $DVD['director'];
+                    $dvdGenre       = $DVD['genre'];
 
                     ?>
                         <li id="dvd-<?php print $dvdID; ?>" class="media-item cf">
@@ -204,10 +53,12 @@
                                     <div class="media-item-plot">
                                         <p><?php print $dvdPlot; ?></p>
                                     </div>
-                                    <dvd class="media-item-director">
-                                        <p>
-                                            <strong>Directed by:</strong> <span><?php print $dvdDirector; ?></span>
-                                        </p>
+                                    <p class="media-item-director">
+                                        <strong>Directed by:</strong> <span><?php print $dvdDirector; ?></span>
+                                    </p>
+                                    <p class="media-item-genre">
+                                        <strong>Genre:</strong> <span><?php print $dvdGenre; ?></span>
+                                    </p>
                                     </div>
                                     <!-- TODO: add more details -->
                                 </div>
@@ -219,12 +70,10 @@
             <div class="total-count">
                 <p><strong>Total:</strong> <?php print count($DVDS); ?></p>
             </div>
+            <div class="check-all">
+                <input type="checkbox" id="check-all-delete">
+                <label for="check-all-delete" disabled="true">Check all</label>
+            </div>
         </form>
 
-        <footer class="site-footer">
-            <p>Another awesome PHP app by <a href="http://richardhuf.com.au" class="site-credit">Richard Huf</a></p>
-        </footer>
-    </section>
-
-</body>
-</html>
+<?php include('includes/footer.php'); ?>

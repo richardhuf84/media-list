@@ -2,8 +2,9 @@ $(document).ready(function() {
 
 	var searchField 		= $('#dvd-title'); 
 	var yearField 			= $('#dvd-year');
+	var imdbidField			= $('#dvd-imdbid');
 	var typingTimer;                //timer identifier
-	var doneTypingInterval = 3000;  //time in ms, 3 second for example
+	var doneTypingInterval = 1000;  //time in ms
 
 	// Search OMDB for title 
 	function omdbAjaxCall() {
@@ -17,11 +18,16 @@ $(document).ready(function() {
 				$('.suggestion').html('<p>No results found. Please refine your search terms.</p>');
 			}
 
+			console.log(data);
+
 			// Set value of search field to returned title
 			searchField.val(data['Title']);
 
 			// set value of yeaar select to returned year
 			yearField.val(data['Year']);
+
+			// set hidden imdbid field to imdbid
+			imdbidField.val(data['imdbID']);
 
 			// Populate suggestion item content
 			if(typeof data['Title'] !== 'undefined') {
@@ -51,7 +57,6 @@ $(document).ready(function() {
 
 	//user is "finished typing," do something
 	function doneTyping () {
-		console.log('done typing');
 	  	omdbAjaxCall();
 	}
 
@@ -64,6 +69,28 @@ $(document).ready(function() {
 	// Error message close
 	$('.error-message-close').click(function() {
 		$(this).parent().fadeOut();
+	});
+
+	// If there is more than one media item, enable check all checkbox 
+	if($('.media-item').length > 1) {
+		console.log('media item is greater than one');
+		$('#check-all-delete').prop('disabled', false);
+	}
+
+	// Check all delete checkboxes
+	$('#check-all-delete').click(function() {
+		// If this check all checkbox is checked
+		if($(this).is(':checked')) {
+			// Check all delete checkboxes
+			$('.delete-item').prop('checked', true);
+			// Change Check all checkbox label
+			$('label[for="check-all-delete"]').text('Uncheck all');
+		} else {
+			// Uncheck all delete checkboxes
+			$('.delete-item').prop('checked', false);
+			// CHange check all checkbox label
+			$('label[for="check-all-delete"]').text('Check all');
+		}
 	});
 
 });
