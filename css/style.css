@@ -138,20 +138,20 @@ fieldset {
 	padding: 0;
 }
 
-.field-dvd-year {
+.field-media-year {
 	display: none;
 }
 
-.label-dvd-title,
-.label-dvd-year {
+.label-media-title,
+.label-media-year {
 	display: block;
 }
 
-.label-dvd-year {
+.label-media-year {
 	margin-bottom: 8px;
 }
 
-[id="dvd-title"] {
+[id="media-title"] {
 	width: 100%;
 }
 
@@ -308,4 +308,13 @@ button i {
 .hidden {
 	display: none;
 	visibility: hidden;
+}
+
+.media-type-checkboxes {
+	display: none;
+}
+
+
+.has-content .media-type-checkboxes {
+	display: block;
 }

@@ -9,5 +9,4 @@
 	        print "<option value='" . $previousYear . "'>" . $previousYear . "</option>"; 
 	    }                  
 	}
-
 ?>

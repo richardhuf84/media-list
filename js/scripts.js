@@ -1,17 +1,20 @@
 $(document).ready(function() {
 
-	var searchField 		= $('#dvd-title'); 
-	var yearField 			= $('#dvd-year');
-	var imdbidField			= $('#dvd-imdbid');
+	var searchField 		= $('#media-title'); 
+	var yearField 			= $('#media-year');
+	var imdbidField			= $('#media-imdbid');
 	var typingTimer;                //timer identifier
 	var doneTypingInterval = 1000;  //time in ms
 
 	// Search OMDB for title 
 	function omdbAjaxCall() {
+
 		var jqxhr = $.getJSON('http://www.omdbapi.com/?t=' + searchField.val() + '&type=movie', function(data) {
+			// Remove has content class from suggestion div
+			$('.suggestion').slideUp(100).removeClass('has-content');
 		
 		}).done(function(data) {
-			
+
 			// if search result is undefined, give error message
 			if(searchField.val() !== '' && typeof data['Title'] == 'undefined') {
 				// alert('please refine search');
@@ -37,7 +40,11 @@ $(document).ready(function() {
 				suggestionItemHTML += '<p class="suggestion-year">' + data['Year'] + '</p>';
 				suggestionItemHTML += '<p class="suggestion-plot">' + data['Plot'] + '</p>';
 
-				$('.suggestion').html(suggestionItemHTML);
+				// Add suggestion HTML to div
+				$('.suggestion .ajax-content').prepend(suggestionItemHTML);
+	
+				// Add class to suggestion to to show checkboxes
+				$('.suggestion').slideDown(300).addClass('has-content');
 			} 
 
 		});
