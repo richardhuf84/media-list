@@ -259,11 +259,54 @@ input[type="number"]:focus {
 	float: right;
 }
 
+.suggestion {
+    background: #FFF;
+    box-shadow: 0 0 20px rgba(0,0,0, 0.2);
+    color: #000;
+    display: none;
+ 	margin-top: 20px;
+	position: relative;
+}
+
+.suggestion:before {
+	border-style: solid;
+	border-width: 0 10px 10px 10px;
+	border-color: transparent transparent #6912E2 transparent;
+	content: '';
+	height: 0;
+	width: 0;
+	position: absolute;
+	top: -10px;
+	left: 20px;
+}
+
+.suggestion-strip {
+	height: 10px;
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#6912e2+0,8e65c6+100 */
+	background: #6912e2; /* Old browsers */
+	background: -moz-linear-gradient(left,  #6912e2 0%, #8e65c6 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#6912e2), color-stop(100%,#8e65c6)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(left,  #6912e2 0%,#8e65c6 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(left,  #6912e2 0%,#8e65c6 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(left,  #6912e2 0%,#8e65c6 100%); /* IE10+ */
+	background: linear-gradient(to right,  #6912e2 0%,#8e65c6 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6912e2', endColorstr='#8e65c6',GradientType=1); /* IE6-9 */
+	width: 100%;
+}
+
+.ajax-content {
+    padding: 20px 20px 0;
+}
+
 .suggestion-poster {
 	float: left;
 	height: auto;
 	margin: 0 20px 10px 0;
 	width: 120px;
+}
+
+.suggestion-title {
+	margin-top: 0;
 }
 
 [value="add"] {
@@ -311,9 +354,38 @@ button i {
 }
 
 .media-type-checkboxes {
+	clear: left;
 	display: none;
+	padding: 20px;
 }
 
+.media-type-wrap {
+	background-color: rgba(53,188,206, 0.4);
+	border-radius: 5px;
+	display: inline-block;
+	float: left;
+	margin-right: 4%;
+	width: 48%;
+}
+
+.media-type-wrap:nth-child(2) {
+	margin-right: 0;
+}
+
+.media-type-wrap label {
+	color: #FFF;
+	display: block;
+	padding: 10px 15px 10px 0;
+}
+
+.media-type-wrap input[type="radio"] {
+	float: left;
+	margin: 13px 10px 13px 15px;
+}
+
+.media-type-wrap.is-checked {
+	background-color: #35BCCE;
+}
 
 .has-content .media-type-checkboxes {
 	display: block;

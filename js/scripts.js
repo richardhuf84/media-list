@@ -4,7 +4,7 @@ $(document).ready(function() {
 	var yearField 			= $('#media-year');
 	var imdbidField			= $('#media-imdbid');
 	var typingTimer;                //timer identifier
-	var doneTypingInterval = 1000;  //time in ms
+	var doneTypingInterval  = 1000;  //time in ms
 
 	// Search OMDB for title 
 	function omdbAjaxCall() {
@@ -41,7 +41,7 @@ $(document).ready(function() {
 				suggestionItemHTML += '<p class="suggestion-plot">' + data['Plot'] + '</p>';
 
 				// Add suggestion HTML to div
-				$('.suggestion .ajax-content').prepend(suggestionItemHTML);
+				$('.suggestion .ajax-content').html(suggestionItemHTML);
 	
 				// Add class to suggestion to to show checkboxes
 				$('.suggestion').slideDown(300).addClass('has-content');
@@ -80,9 +80,21 @@ $(document).ready(function() {
 
 	// If there is more than one media item, enable check all checkbox 
 	if($('.media-item').length > 1) {
-		console.log('media item is greater than one');
 		$('#check-all-delete').prop('disabled', false);
 	}
+
+	// Media type radio buttons - add active class for checked radio
+	$('[name="media-type"]:checked').parent().addClass('is-checked');
+
+	$('[name="media-type"]').change(function() {
+		$('.media-type-wrap').removeClass('is-checked');
+		$(this).parent().toggleClass('is-checked');
+
+		// if($(this).is(':checked')) {
+			// $(this).parent().toggleClass('is-checked');
+		// } else {
+		// }
+	});
 
 	// Check all delete checkboxes
 	$('#check-all-delete').click(function() {

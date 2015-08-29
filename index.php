@@ -20,12 +20,17 @@
                 </div>
                 <input type="text" name="media-imdbid" id="media-imdbid" class="hidden">
                 <div class="suggestion">
+                    <div class="suggestion-strip"></div>
                     <div class="ajax-content"></div>    
-                    <div class="media-type-checkboxes">
-                        <input type="radio" name="media-type" value="bluray" id="radio-media-type-bluray" checked="checked">
-                        <label for="radio-media-type-bluray">Blu-ray</label>
-                        <input type="radio" name="media-type" value="dvd" id="radio-media-type-dvd">
-                        <label for="radio-media-type-dvd">DVD</label>
+                    <div class="media-type-checkboxes cf">
+                        <div class="media-type-wrap">
+                            <input type="radio" name="media-type" value="bluray" id="radio-media-type-bluray" checked="checked">
+                            <label for="radio-media-type-bluray">Blu-ray</label>
+                        </div>
+                        <div class="media-type-wrap"> 
+                            <input type="radio" name="media-type" value="dvd" id="radio-media-type-dvd">
+                            <label for="radio-media-type-dvd">DVD</label>
+                        </div>
                     </div>
                 </div>
                 <button type="submit" name="update" value="add"><i class="fa fa-plus-circle">Add</i></button>
