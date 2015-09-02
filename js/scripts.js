@@ -1,10 +1,10 @@
 $(document).ready(function() {
 
-	var searchField 		= $('#media-title'); 
-	var yearField 			= $('#media-year');
-	var imdbidField			= $('#media-imdbid');
-	var typingTimer;                //timer identifier
-	var doneTypingInterval  = 1000;  //time in ms
+	var searchField = $('#media-title'); 
+	var yearField = $('#media-year');
+	var imdbidField = $('#media-imdbid');
+	var typingTimer; //timer identifier
+	var doneTypingInterval = 1000; //time in ms
 
 	// Search OMDB for title 
 	function omdbAjaxCall() {
@@ -16,7 +16,7 @@ $(document).ready(function() {
 		}).done(function(data) {
 
 			// if search result is undefined, give error message
-			if(searchField.val() !== '' && typeof data['Title'] == 'undefined') {
+			if(searchField.val() !== '' && typeof data.Title == 'undefined') {
 				// alert('please refine search');
 				$('.suggestion').html('<p>No results found. Please refine your search terms.</p>');
 			}
@@ -24,21 +24,21 @@ $(document).ready(function() {
 			console.log(data);
 
 			// Set value of search field to returned title
-			searchField.val(data['Title']);
+			searchField.val(data.Title);
 
 			// set value of yeaar select to returned year
-			yearField.val(data['Year']);
+			yearField.val(data.Year);
 
 			// set hidden imdbid field to imdbid
-			imdbidField.val(data['imdbID']);
+			imdbidField.val(data.imdbID);
 
 			// Populate suggestion item content
-			if(typeof data['Title'] !== 'undefined') {
+			if(typeof data.Title !== 'undefined') {
 				var suggestionItemHTML = '';
-				suggestionItemHTML += '<img class="suggestion-poster" src=' + data['Poster'] + ' alt=' + data['Title'] + '>';
-				suggestionItemHTML += '<h3 class="suggestion-title">' + data['Title'] + '</h3>';
-				suggestionItemHTML += '<p class="suggestion-year">' + data['Year'] + '</p>';
-				suggestionItemHTML += '<p class="suggestion-plot">' + data['Plot'] + '</p>';
+				suggestionItemHTML += '<img class="suggestion-poster" src=' + data.Poster + ' alt=' + data.Title + '>';
+				suggestionItemHTML += '<h3 class="suggestion-title">' + data.Title + '</h3>';
+				suggestionItemHTML += '<p class="suggestion-year">' + data.Year + '</p>';
+				suggestionItemHTML += '<p class="suggestion-plot">' + data.Plot + '</p>';
 
 				// Add suggestion HTML to div
 				$('.suggestion .ajax-content').html(suggestionItemHTML);
@@ -53,18 +53,18 @@ $(document).ready(function() {
 	// Start ajax call after user stops typing for a few seconds
 	//on keyup, start the countdown
 	searchField.on('keyup', function () {
-	  clearTimeout(typingTimer);
-	  typingTimer = setTimeout(doneTyping, doneTypingInterval);
+		clearTimeout(typingTimer);
+		typingTimer = setTimeout(doneTyping, doneTypingInterval);
 	});
 
 	//on keydown, clear the countdown 
 	searchField.on('keydown', function () {
-	  clearTimeout(typingTimer);
+		clearTimeout(typingTimer);
 	});
 
 	//user is "finished typing," do something
 	function doneTyping () {
-	  	omdbAjaxCall();
+		omdbAjaxCall();
 	}
 
 	// Toggle media item details

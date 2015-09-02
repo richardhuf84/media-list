@@ -9,4 +9,8 @@
 	        print "<option value='" . $previousYear . "'>" . $previousYear . "</option>"; 
 	    }                  
 	}
+
+	function base_url() {
+		return "localhost:888/media-list/";
+	}
 ?>

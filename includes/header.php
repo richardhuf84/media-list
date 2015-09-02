@@ -34,7 +34,7 @@
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     
     <!-- Main js file -->
-    <script src="js/scripts.js"></script>
+    <script src="js/scripts.min.js"></script>
     <!--<script src="js/jquery.autocomplete.js"></script>-->
 
     <!--[if lt IE 9]>
@@ -50,6 +50,6 @@
         include('database.php'); ?> 
 
     <header class="site-header">
-        <h1 class="site-logo">Media List</h1>
+        <h1 class="site-logo"><a href="<?php base_url(); ?>">Media List</a></h1>
     </header>
  

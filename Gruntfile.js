@@ -1,55 +1,115 @@
-module.exports = function(grunt) {
+'use strict';
 
-  // Project configuration.
+module.exports = function (grunt) {
+
   grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
-    // uglify: {
-    //   options: {
-    //     banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
-    //   },
-    //   build: {
-    //     src: 'src/<%= pkg.name %>.js',
-    //     dest: 'build/<%= pkg.name %>.min.js'
-    //   }
-    // },
-	autoprefixer: {
-    	options: {
-      		// Task-specific options go here.
-    		// browsers: ['last 2 versions', 'ie 8', 'ie 9'],
-    		browsers: ['Explorer >= 8'],
-    		map: true
-    	},
-    	your_target: {
-      		// Target-specific file lists and/or options go here.
-    	},
-		dist: {
-	        files: {
-	            'css/build/style.css': 'css/style.css'
-	        }
-	    }
-  	},
-  	watch: {
-        styles: {
-            files: ['css/style.css'],
-            tasks: ['autoprefixer']
+    watch: {
+      options: {
+        livereload: false
+      },
+      sass: {
+        files: ['css/{,**/}*.{scss,sass}'],
+        tasks: ['compass:dev'],
+        options: {
+          livereload: false
         }
+      },
+      registry: {
+        files: ['*.info', '{,**}/*.{php,inc}'],
+        // tasks: ['shell'],
+        options: {
+          livereload: false
+        }
+      },
+      images: {
+        files: ['img/**']
+      },
+      css: {
+        files: ['css/build/{,**/}*.css']
+      },
+      js: {
+        files: ['js/{,**/}*.js', '!js/{,**/}*.min.js'],
+        tasks: ['jshint', 'uglify:dev']
+      }
+    },
+
+    compass: {
+      options: {
+        config: 'config.rb',
+        bundleExec: true,
+        force: true
+      },
+      dev: {
+        options: {
+          environment: 'production'
+        }
+      },
+      dist: {
+        options: {
+          environment: 'production'
+        }
+      }
+    },
+
+    jshint: {
+      // options: {
+      //   // jshintrc: '.jshintrc'
+      // },
+      all: ['js/{,**/}*.js', '!js/{,**/}*.min.js']
+    },
+
+    uglify: {
+      dev: {
+        options: {
+          mangle: false,
+          compress: false,
+          beautify: true
+        },
+        files: [{
+          expand: true,
+          flatten: true,
+          cwd: 'js',
+          dest: 'js',
+          src: ['**/*.js', '!**/*.min.js'],
+          rename: function(dest, src) {
+            var folder = src.substring(0, src.lastIndexOf('/'));
+            var filename = src.substring(src.lastIndexOf('/'), src.length);
+            filename = filename.substring(0, filename.lastIndexOf('.'));
+            return dest + '/' + folder + filename + '.min.js';
+          }
+        }]
+      },
+      dist: {
+        options: {
+          mangle: true,
+          compress: true
+        },
+        files: [{
+          expand: true,
+          flatten: true,
+          cwd: 'js',
+          dest: 'js',
+          src: ['**/*.js', '!**/*.min.js'],
+          rename: function(dest, src) {
+            var folder = src.substring(0, src.lastIndexOf('/'));
+            var filename = src.substring(src.lastIndexOf('/'), src.length);
+            filename = filename.substring(0, filename.lastIndexOf('.'));
+            return dest + '/' + folder + filename + '.min.js';
+          }
+        }]
+      }
     }
   });
 
-  // Load the plugin that provides the "uglify" task.
-  // grunt.loadNpmTasks('grunt-contrib-uglify');
-
-  // Load autoprefixr
-  grunt.loadNpmTasks('grunt-autoprefixer');
-  
-  // Default task(s).
-  // grunt.registerTask('default', ['uglify']);
-  grunt.registerTask('default', ['autoprefixer']);
-
-  // Load watch task
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-compass');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+
+  grunt.registerTask('build', [
+    'uglify:dist',
+    'compass:dist',
+    'jshint'
+  ]);
 
 };
-
-
-
