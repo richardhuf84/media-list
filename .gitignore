@@ -1,2 +1,5 @@
 .DS_STORE
 .vagrant
+.sass-cache
+.sass-cache/
+.sass-cache/*

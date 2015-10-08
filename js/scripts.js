@@ -1,18 +1,18 @@
 $(document).ready(function() {
 
-	var searchField = $('#media-title'); 
+	var searchField = $('#media-title');
 	var yearField = $('#media-year');
 	var imdbidField = $('#media-imdbid');
 	var typingTimer; //timer identifier
 	var doneTypingInterval = 1000; //time in ms
 
-	// Search OMDB for title 
+	// Search OMDB for title
 	function omdbAjaxCall() {
 
 		var jqxhr = $.getJSON('http://www.omdbapi.com/?t=' + searchField.val() + '&type=movie', function(data) {
 			// Remove has content class from suggestion div
 			$('.suggestion').slideUp(100).removeClass('has-content');
-		
+
 		}).done(function(data) {
 
 			// if search result is undefined, give error message
@@ -42,27 +42,27 @@ $(document).ready(function() {
 
 				// Add suggestion HTML to div
 				$('.suggestion .ajax-content').html(suggestionItemHTML);
-	
+
 				// Add class to suggestion to to show checkboxes
 				$('.suggestion').slideDown(300).addClass('has-content');
-			} 
+			}
 
 		});
-	}	
+	}
 
 	// Start ajax call after user stops typing for a few seconds
-	//on keyup, start the countdown
+	// on keyup, start the countdown
 	searchField.on('keyup', function () {
 		clearTimeout(typingTimer);
 		typingTimer = setTimeout(doneTyping, doneTypingInterval);
 	});
 
-	//on keydown, clear the countdown 
+	// on keydown, clear the countdown
 	searchField.on('keydown', function () {
 		clearTimeout(typingTimer);
 	});
 
-	//user is "finished typing," do something
+	// user is "finished typing," do something
 	function doneTyping () {
 		omdbAjaxCall();
 	}
@@ -78,7 +78,7 @@ $(document).ready(function() {
 		$(this).parent().fadeOut();
 	});
 
-	// If there is more than one media item, enable check all checkbox 
+	// If there is more than one media item, enable check all checkbox
 	if($('.media-item').length > 1) {
 		$('#check-all-delete').prop('disabled', false);
 	}
