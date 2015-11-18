@@ -68,9 +68,9 @@ $(document).ready(function() {
 	}
 
 	// Toggle media item details
-	$('.media-item-detail-toggle').click(function(e) {
+	$('.js-toggle-media-details').click(function(e) {
 		e.preventDefault();
-		$(this).parent().next().slideToggle(300);
+		$(this).closest('.media-item-detail').slideToggle(300);
 	});
 
 	// Error message close

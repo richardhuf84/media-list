@@ -1,16 +1,21 @@
-$color1: #b1e088;
-$color1: red;
+$color1: #B1E088; // Green
+$color2: #35BCCE; // Blue
+$color3: #8758C7; // Purple
+$color4: #000;    // Black
+$color5: #FFF;    // White
+
+@import "normalize";
 
 html {
-	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#b1e088+0,35bcce+100 */
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/$color1+0,35bcce+100 */
 	background: $color1; /* Old browsers */
-	background: -moz-linear-gradient(45deg,  #b1e088 0%, #35bcce 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#b1e088), color-stop(100%,#35bcce)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(45deg,  #b1e088 0%,#35bcce 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(45deg,  #b1e088 0%,#35bcce 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(45deg,  #b1e088 0%,#35bcce 100%); /* IE10+ */
-	background: linear-gradient(45deg,  #b1e088 0%,#35bcce 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b1e088', endColorstr='#35bcce',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+	background: -moz-linear-gradient(45deg,  $color1 0%, $color2 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,$color1), color-stop(100%,$color2)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(45deg,  $color1 0%,$color2 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(45deg,  $color1 0%,$color2 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(45deg,  $color1 0%,$color2 100%); /* IE10+ */
+	background: linear-gradient(45deg,  $color1 0%,$color2 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$color1', endColorstr='$color2',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 	background-attachment: fixed;
   	box-sizing: border-box;
 }
@@ -20,7 +25,7 @@ html {
 }
 
 body {
-	color: #FFF;
+		color: $color5;
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
     margin: 0;
@@ -53,8 +58,8 @@ body {
     *zoom: 1;
 }
 
-form {
-
+a {
+	color: $color5;
 }
 
 img, object, embed, video {
@@ -63,7 +68,7 @@ img, object, embed, video {
 }
 
 .site-header {
-	background-color: #FFF;
+	background-color: $color5;
 
 }
 
@@ -73,7 +78,7 @@ img, object, embed, video {
 	text-align: center;
 
 	a {
-		color: #35BCCE;
+		color: $color2;
 		text-decoration: none;
 	}
 }
@@ -90,9 +95,9 @@ img, object, embed, video {
 }
 
 .media-item {
-	border-bottom: 2px solid #FFF;
+	border-bottom: 2px solid $color5;
     clear: left;
-    color: #FFF;
+    color: $color5;
     margin: 0;
     padding-right: 20px;
     line-height: 2.4em;
@@ -120,9 +125,9 @@ img, object, embed, video {
 }
 
 .error-message {
-    background-color: #8758C7;
+    background-color: $color3;
 	border-radius: 5px;
-    color: #FFF;
+    color: $color5;
     font-size: 14px;
  	margin-bottom: 30px;
     padding: 5px 5px 5px 15px;
@@ -171,9 +176,9 @@ fieldset {
 
 input[type="submit"] {
 	background-color: transparent;
-	border: 2px solid #FFF;
+	border: 2px solid $color5;
 	border-radius: 5px;
-	color: #FFF;
+	color: $color5;
 	display: block;
 	font-size: 18px;
 	float: right;
@@ -184,23 +189,23 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-	background-color: #FFF;
-	color: #35BCCE;
+	background-color: $color5;
+	color: $color2;
 }
 
 input[type="reset"]:hover {
-	background-color: #FFF;
-	color: #35BCCE;
+	background-color: $color5;
+	color: $color2;
 }
 
 input[type="text"],
 input[type="password"],
 input[type="email"],
 input[type="number"] {
-	background: #FFF;
-	border: 2px solid #FFF;
+	background: $color5;
+	border: 2px solid $color5;
 	border-radius: 5px;
-	color: #35BCCE;
+	color: $color2;
 	font-size: 14px;
 	font-weight: bold;
 	padding: 5px 10px;
@@ -218,10 +223,10 @@ input[type="number"]:focus {
 .site-credit {
 	font-size: 10px;
 	text-transform: uppercase;
-	color: #35BCCE;
+	color: $color2;
 	font-weight: bold;
 	border-radius: 5px;
-	background-color: #FFF;
+	background-color: $color5;
 	text-decoration: none;
 	padding: 3px 6px;
 }
@@ -238,10 +243,10 @@ input[type="number"]:focus {
 .media-item-detail-toggle {
 	font-size: 9px;
 	text-transform: uppercase;
-	color: #35BCCE;
+	color: $color2;
 	font-weight: bold;
 	border-radius: 5px;
-	background-color: #FFF;
+	background-color: $color5;
 	text-decoration: none;
 	padding: 3px 6px;
 }
@@ -268,7 +273,7 @@ input[type="number"]:focus {
 }
 
 .suggestion {
-    background: #FFF;
+    background: $color5;
     box-shadow: 0 0 20px rgba(0,0,0, 0.2);
     color: #000;
     display: none;
@@ -318,15 +323,15 @@ input[type="number"]:focus {
 }
 
 [value="add"] {
-	background-color: #35BCCE;
+	background-color: $color2;
 	border: none;
-	color: #FFF;
+	color: $color5;
 	width: 100%;
 }
 
 [value="add"]:hover {
-	color: #35BCCE;
-	background-color: #FFF;
+	color: $color2;
+	background-color: $color5;
 }
 
 .total-count {
@@ -336,9 +341,9 @@ input[type="number"]:focus {
 button {
 	-webkit-appearance: none;
 	background-color: transparent;
-	border: 2px solid #FFF;
+	border: 2px solid $color5;
 	border-radius: 5px;
-	color: #FFF;
+	color: $color5;
 	display: block;
 	font-size: 18px;
 	margin: 20px 0;
@@ -347,8 +352,8 @@ button {
 }
 
 button:hover {
-	background-color: #FFF;
-	color: #35BCCE;
+	background-color: $color5;
+	color: $color2;
 }
 
 button i {
@@ -381,7 +386,7 @@ button i {
 }
 
 .media-type-wrap label {
-	color: #FFF;
+	color: $color5;
 	display: block;
 	padding: 10px 15px 10px 0;
 }
@@ -392,7 +397,7 @@ button i {
 }
 
 .media-type-wrap.is-checked {
-	background-color: #35BCCE;
+	background-color: $color2;
 }
 
 .has-content .media-type-checkboxes {
