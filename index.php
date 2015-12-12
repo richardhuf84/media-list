@@ -85,7 +85,7 @@
             </ul>
             <button type="submit" name="update" value="delete" class="submit-delete"><i class="fa fa-trash-o"></i>Delete</button>
             <div class="total-count">
-                <p><strong>Total:</strong> <?php print count($DVDS); ?></p>
+                <p><strong>Total:</strong> <?php print count($mediaList); ?></p>
             </div>
             <div class="check-all">
                 <input type="checkbox" id="check-all-delete">
