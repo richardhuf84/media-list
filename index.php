@@ -48,7 +48,6 @@
                     $mediaType        = $media['media_type'];
 
                     ?>
-<<<<<<< HEAD
                   <li id="media-<?php print $mediaID; ?>" class="media-item cf">
                       <p class="media-item-title-year">
                           <a href="#" class="js-toggle-media-details">
@@ -82,39 +81,6 @@
                           </div>
                       </div>
                   </li>
-=======
-                        <li id="media-<?php print $mediaID; ?>" class="media-item cf">
-                            <p class="media-item-title-year">
-                                <span class="media-item-title"><?php print $mediaTitle; ?></span> - <span class="media-item-year"><?php print $mediaYear; ?></span>
-                            </p>
-                            <div class="media-item-edit">
-                                <a href="#" class="media-item-detail-toggle">Details</a>
-                                <input type="checkbox" name="delete[<?php print $mediaID; ?>]" class="delete-item" id="delete[<?php print $mediaID; ?>]">
-                                <label for="delete[<?php print $mediaID; ?>]"><i class="fa fa-trash-o"></i></label>
-                            </div>
-                            <div class="media-item-detail">
-                                <div class="media-item-detail-poster">
-                                    <img src="<?php print $mediaPoster; ?>" class="media-item-poster-img">
-                                </div>
-                                <div class="media-item-detail-meta">
-                                    <div class="media-item-plot">
-                                        <p><?php print $mediaPlot; ?></p>
-                                    </div>
-                                    <p class="media-item-director">
-                                        <strong>Directed by:</strong> <span><?php print $mediaDirector; ?></span>
-                                    </p>
-                                    <p class="media-item-genre">
-                                        <strong>Genre:</strong> <span><?php print $mediaGenre; ?></span>
-                                    </p>
-                                    <p class="media-item-type">
-                                        <strong>Media:</strong> <span><?php print $mediaType; ?></span>
-                                    </p>
-                                    </div>
-                                    <!-- TODO: add more details -->
-                                </div>
-                            </div>
-                        </li>
->>>>>>> f1cf753954c160f6260cedfea9d19c2d11162b8f
                 <?php } ?>
             </ul>
             <button type="submit" name="update" value="delete" class="submit-delete"><i class="fa fa-trash-o"></i>Delete</button>

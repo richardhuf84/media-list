@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-
+    
     <!-- Main js file -->
     <script src="js/scripts.min.js"></script>
     <!--<script src="js/jquery.autocomplete.js"></script>-->
@@ -46,23 +46,10 @@
 </head>
 <body>
 
-    <?php
-        // Composer autoload
-        require 'vendor/autoload.php';
-
-        $app = new \Slim\Slim(array(
-          'debug' => true
-        ));
-
-
-        $app->get('/', function() use($app) {
-            
-            // $app->render('index.php');
-        });
-
-        include ('functions.php');
-        include('database.php'); ?>
+    <?php include ('functions.php'); 
+        include('database.php'); ?> 
 
     <header class="site-header">
         <h1 class="site-logo"><a href="<?php base_url(); ?>">Media List</a></h1>
     </header>
+ 
