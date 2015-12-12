@@ -11,9 +11,9 @@
     }
 
     // CREATE
-    // If request method is post, insert dvd title into the database
+    // If request method is post, insert media title into the database
     if ($_SERVER["REQUEST_METHOD"] == 'POST') {
-        // Check for imdbid 
+        // Check for imdbid
         if ($_POST['media-imdbid']) {
             $mediaIMDBID = trim($_POST['media-imdbid']);
             $mediaIMDBID = filter_var($mediaIMDBID, FILTER_SANITIZE_STRING);
@@ -34,7 +34,7 @@
             } else {
 
                 if ($_POST['update'] == 'add') {
-                   
+
                     if ($_POST['media-title'] && $_POST['media-year']) {
 
                         // Reset vars
@@ -55,7 +55,7 @@
                         $json=file_get_contents("http://www.omdbapi.com/?t=$urlEncodedTitle&y=$mediaYear");
                         $details=json_decode($json);
 
-                        if ($details->Response=='True') {   
+                        if ($details->Response=='True') {
                             $mediaIMDBID     = $details->imdbID;
                             $mediaPoster     = $details->Poster;
                             $mediaDirector   = $details->Director;
@@ -93,18 +93,18 @@
                 }
             }
         }
-      
+
         // DELETE
         if($_POST['update'] == 'delete') {
             foreach($_POST['delete'] as $key => $value) {
                 $sqlDelete = "DELETE from media WHERE id = $key";
                 $db->exec($sqlDelete);
-            }    
+            }
         }
     }
 
     // READ
-    // Get list of dvd's from dvds table ordered by id asc
+    // Get list of media from dvds media ordered by id asc
     try {
         $results = $db->query("SELECT id, title, year, plot, posterURL, director, genre, media_type FROM media ORDER BY id DESC");
     } catch (Exception $e){
