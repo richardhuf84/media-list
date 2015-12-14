@@ -26,7 +26,7 @@ $(document).ready(function() {
 			// Set value of search field to returned title
 			searchField.val(data.Title);
 
-			// set value of yeaar select to returned year
+			// set value of year select to returned year
 			yearField.val(data.Year);
 
 			// set hidden imdbid field to imdbid

@@ -5,11 +5,14 @@
             print "<p class='error-message'>$errorMessage <span class='error-message-close'>X</span></p>";
         } ?>
 
+        <p>Movie Title from localStorage: <span id="local-storage-movie-title"></span></p>
+
         <form class="media-submit-form" method="post" action="index.php">
             <fieldset class="fieldset-add-title">
                 <div class="field-media-title">
                     <label class="label-media-title" for="media-title">Search for title</label>
                     <input type="text" name="media-title" id="media-title" autofocus autocomplete="off">
+                    <input type="button" id="search-buton" value="Search">
                 </div>
                 <div class="field-media-year">
                     <label class="label-media-year" for="media-year">Year of release</label>
