@@ -1,18 +1,38 @@
-<?php include('includes/header.php'); ?>
+<?php
+
+  // $_POST = array();
+
+  include('includes/functions.php');
+  include('includes/header.php');
+  include('includes/init.php');
+?>
 
     <section class="page-wrap">
         <?php if (isset($errorMessage) && !empty($errorMessage)) {
             print "<p class='error-message'>$errorMessage <span class='error-message-close'>X</span></p>";
         } ?>
 
-        <p>Movie Title from localStorage: <span id="local-storage-movie-title"></span></p>
-
-        <form class="media-submit-form" method="post" action="index.php">
+        <form class="media-submit-form" method="post" action="validate.php">
             <fieldset class="fieldset-add-title">
                 <div class="field-media-title">
                     <label class="label-media-title" for="media-title">Search for title</label>
                     <input type="text" name="media-title" id="media-title" autofocus autocomplete="off">
-                    <input type="button" id="search-buton" value="Search">
+                    <div class="suggestion">
+                        <div class="suggestion-strip"></div>
+                        <a href="#" class="clear-search">Clear</a>
+                        <div class="ajax-content"></div>
+                        <div class="media-type-checkboxes cf">
+                            <div class="media-type-wrap">
+                                <input type="radio" name="media-type" value="bluray" id="radio-media-type-bluray" checked="checked">
+                                <label for="radio-media-type-bluray">Blu-ray</label>
+                            </div>
+                            <div class="media-type-wrap">
+                                <input type="radio" name="media-type" value="dvd" id="radio-media-type-dvd">
+                                <label for="radio-media-type-dvd">DVD</label>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="button" id="search-button" value="Search">
                 </div>
                 <div class="field-media-year">
                     <label class="label-media-year" for="media-year">Year of release</label>
@@ -22,20 +42,6 @@
                     </select>
                 </div>
                 <input type="text" name="media-imdbid" id="media-imdbid" class="hidden">
-                <div class="suggestion">
-                    <div class="suggestion-strip"></div>
-                    <div class="ajax-content"></div>
-                    <div class="media-type-checkboxes cf">
-                        <div class="media-type-wrap">
-                            <input type="radio" name="media-type" value="bluray" id="radio-media-type-bluray" checked="checked">
-                            <label for="radio-media-type-bluray">Blu-ray</label>
-                        </div>
-                        <div class="media-type-wrap">
-                            <input type="radio" name="media-type" value="dvd" id="radio-media-type-dvd">
-                            <label for="radio-media-type-dvd">DVD</label>
-                        </div>
-                    </div>
-                </div>
                 <button type="submit" name="update" value="add"><i class="fa fa-plus-circle">Add</i></button>
             </fieldset>
             <ul class="dvd-list">

@@ -45,32 +45,48 @@ $(document).ready(function() {
 
 				// Add class to suggestion to to show checkboxes
 				$('.suggestion').slideDown(300).addClass('has-content');
+
+				// Hide search button while suggetion is open
+				$('#search-button').addClass('hidden');
 			}
 
 		});
 	}
 
-	// Start ajax call after user stops typing for a few seconds
-	// on keyup, start the countdown
-	searchField.on('keyup', function () {
-		clearTimeout(typingTimer);
-		typingTimer = setTimeout(doneTyping, doneTypingInterval);
+  // Search bar - hit enter to search
+	searchField.on('keydown', function(event) {
+		if (event.which == 13 || event.keyCode == 13) {
+				omdbAjaxCall();
+        return false;
+    }
+
+    return true;
 	});
 
-	// on keydown, clear the countdown
-	searchField.on('keydown', function () {
-		clearTimeout(typingTimer);
-	});
-
-	// user is "finished typing," do something
-	function doneTyping () {
+	// Search bar - hit search button to search
+	$('#search-button').click(function() {
 		omdbAjaxCall();
-	}
+		return false;
+	});
+
+	// Clear Search
+	$('.clear-search').click(function() {
+		searchField.val('');
+    suggestionItemHTML = '';
+
+		$('.suggestion').slideUp(300).removeClass('has-content');
+
+		// Show search button as suggetion closes
+		$('#search-button').removeClass('hidden');
+
+		return false;
+
+	});
 
 	// Toggle media item details
 	$('.js-toggle-media-details').click(function(e) {
 		e.preventDefault();
-		$(this).closest('.media-item-detail').slideToggle(300);
+		$(this).parent().parent().find('.media-item-detail').slideToggle(300);
 	});
 
 	// Error message close
@@ -98,18 +114,26 @@ $(document).ready(function() {
 
 	// Check all delete checkboxes
 	$('#check-all-delete').click(function() {
+
 		// If this check all checkbox is checked
 		if($(this).is(':checked')) {
+
 			// Check all delete checkboxes
 			$('.delete-item').prop('checked', true);
+
 			// Change Check all checkbox label
 			$('label[for="check-all-delete"]').text('Uncheck all');
+
 		} else {
+
 			// Uncheck all delete checkboxes
 			$('.delete-item').prop('checked', false);
+
 			// CHange check all checkbox label
 			$('label[for="check-all-delete"]').text('Check all');
+
 		}
+
 	});
 
 });

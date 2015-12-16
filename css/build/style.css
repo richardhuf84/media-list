@@ -401,7 +401,9 @@ fieldset {
   padding-right: 10px;
 }
 
-input[type="submit"] {
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
   background-color: transparent;
   border: 2px solid #FFF;
   border-radius: 5px;
@@ -541,6 +543,17 @@ input[type="number"]:focus {
   width: 100%;
 }
 
+.clear-search {
+  float: right;
+  color: #8758C7;
+  display: block;
+  margin: 20px 20px 0 0;
+  text-decoration: underline;
+}
+.clear-search:hover {
+  text-decoration: none;
+}
+
 .ajax-content {
   padding: 20px 20px 0;
 }
@@ -596,8 +609,8 @@ button i {
 }
 
 .hidden {
-  display: none;
-  visibility: hidden;
+  display: none !important;
+  visibility: hidden !important;
 }
 
 .media-type-checkboxes {

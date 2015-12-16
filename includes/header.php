@@ -46,11 +46,6 @@
 </head>
 <body>
 
-    <?php
-      include ('functions.php');
-      include('database.php');
-    ?> 
-
     <header class="site-header">
-        <h1 class="site-logo"><a href="<?php base_url(); ?>">Media List</a></h1>
+        <h1 class="site-logo"><a href="/">Media List</a></h1>
     </header>
