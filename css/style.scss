@@ -5,6 +5,7 @@ $color4: #000;    // Black
 $color5: #FFF;    // White
 
 @import "normalize";
+@import "compass";
 
 html {
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/$color1+0,35bcce+100 */
@@ -68,14 +69,13 @@ img, object, embed, video {
 }
 
 .site-header {
+	@include clearfix;
 	background-color: $color5;
-
+	margin-bottom: 30px;
 }
 
 .site-logo {
-	margin: 0 0 20px;
-	padding: 30px 0 30px 30px;
-	text-align: center;
+	margin: 30px 0 0 30px;
 
 	a {
 		color: $color2;
@@ -83,9 +83,14 @@ img, object, embed, video {
 	}
 }
 
+.site-tagline {
+	color: $color2;
+	padding-left: 30px;
+}
+
 .page-wrap {
-	margin: 0 auto;
-    width: 80%;
+	margin: 0 auto 0 30px;
+  width: 80%;
 }
 
 @media screen and (min-width: 720px) {
@@ -322,7 +327,8 @@ input[type="number"]:focus {
 }
 
 .ajax-content {
-    padding: 20px 20px 0;
+	@include clearfix;
+	padding: 20px 20px 0;
 }
 
 .suggestion-poster {
@@ -416,4 +422,66 @@ button i {
 
 .has-content .media-type-checkboxes {
 	display: block;
+}
+
+.login-out {
+	color: $color3;
+	float: right;
+	width: 242px;
+
+	label {
+		display: block;
+		font-size: 14px;
+	}
+
+	[id="login"] {
+		display: inline-block;
+		border-color: $color3;
+		color: $color3;
+		font-size: 14px;
+		float: none;
+		line-height: 1.3em;
+		margin: 20px 0 0;
+		padding: 6px;
+		width: inherit;
+
+		&:hover,
+		&:active {
+			background: $color3;
+			color: $color5;
+		}
+	}
+
+	input[type="text"],
+	input[type="email"],
+	input[type="password"] {
+		background: $color3;
+		color: $color5;
+		font-size: 14px;
+		line-height: 1.3em;
+	}
+
+	a:link,
+	a:visited {
+		color: darken($color3, 10%);
+		font-weight: 700;
+	}
+
+	a:hover,
+	a:active {
+		color: lighten($color3, 10%);
+	}
+}
+
+.login-out > h3 {
+	cursor: pointer;
+}
+
+// Hide login form initially, to be toggled with js
+form[name="loginform"] {
+	display: none;
+}
+
+.logout-link {
+	margin-right: 20px;
 }

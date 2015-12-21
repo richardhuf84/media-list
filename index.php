@@ -1,26 +1,27 @@
 <?php
 
-  // $_POST = array();
-
-  include('includes/functions.php');
-  include('includes/header.php');
   include('includes/init.php');
+  include('includes/header.php');
 ?>
 
     <section class="page-wrap">
         <?php if (isset($errorMessage) && !empty($errorMessage)) {
             print "<p class='error-message'>$errorMessage <span class='error-message-close'>X</span></p>";
-        } ?>
+        }
+
+        // var_dump($_SESSION);
+        $loggedIn = $_SESSION['LoggedIn']; ?>
 
         <form class="media-submit-form" method="post" action="validate.php">
             <fieldset class="fieldset-add-title">
                 <div class="field-media-title">
-                    <label class="label-media-title" for="media-title">Search for title</label>
+                    <label class="label-media-title" for="media-title">Search for a movie title</label>
                     <input type="text" name="media-title" id="media-title" autofocus autocomplete="off">
                     <div class="suggestion">
                         <div class="suggestion-strip"></div>
                         <a href="#" class="clear-search">Clear</a>
                         <div class="ajax-content"></div>
+                        <?php if(!empty($loggedIn)) { ?>
                         <div class="media-type-checkboxes cf">
                             <div class="media-type-wrap">
                                 <input type="radio" name="media-type" value="bluray" id="radio-media-type-bluray" checked="checked">
@@ -31,6 +32,7 @@
                                 <label for="radio-media-type-dvd">DVD</label>
                             </div>
                         </div>
+                        <?php } ?>
                     </div>
                     <input type="button" id="search-button" value="Search">
                 </div>
@@ -41,9 +43,12 @@
                         <?php generateYearOptions(50) ?>
                     </select>
                 </div>
+                <?php if(!empty($loggedIn)) { ?>
                 <input type="text" name="media-imdbid" id="media-imdbid" class="hidden">
                 <button type="submit" name="update" value="add"><i class="fa fa-plus-circle">Add</i></button>
+                <?php } ?>
             </fieldset>
+            <?php if(!empty($loggedIn)) { ?>
             <ul class="dvd-list">
                 <?php
                 foreach ($mediaList as $media) {
@@ -100,6 +105,8 @@
                 <input type="checkbox" id="check-all-delete">
                 <label for="check-all-delete" disabled="true">Check all</label>
             </div>
+            <?php } ?>
+
         </form>
 
-<?php include('includes/footer.php'); ?>
+  <?php include('includes/footer.php'); ?>

@@ -47,5 +47,33 @@
 <body>
 
     <header class="site-header">
+        <div class="login-out">
+          <h3><a href="Login">Login</a></h3>
+          <?php
+          // If not logged in, how login form
+          if($_SESSION['LoggedIn'] == 0) { ?>
+          <!-- User login form -->
+          <form method="post" action="login.php" name="loginform" id="loginform">
+          <fieldset>
+              <div class="input-wrap">
+                <label for="email">Email:</label><input type="text" name="email" id="email" value="" placeholder="Email Address" autofocus />
+              </div>
+              <div class="input-wrap">
+              <label for="password">Password:</label><input type="password" name="password" id="password" value="" placeholder="Your password" />
+            </div>
+              <input type="submit" name="login" id="login" value="Login" />
+              <p class="message register">Not yet a member? <a href="register.php">Register</a>.</p>
+              <p class="message forgot-password"><a href="forgot-password.php">I forgot my password</a></p>
+          </fieldset>
+          </form>
+          <?php
+          // else, show logout link
+          } else {
+            echo "<p>Hi, " . $_SESSION['FirstName'] . ".</p>";
+            echo "<p>Your User ID is " . $_SESSION['UserID'] . "</p>";
+            echo "<p class='logout-link'><a href='logout.php'>Logout</a>";
+          } ?>
+        </div>
         <h1 class="site-logo"><a href="/">Media List</a></h1>
+        <p class="site-tagline"><em>Keep track of your Blu Ray and DVD collection.</em></p>
     </header>

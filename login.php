@@ -4,20 +4,11 @@
    * User login page
    */
 
-   include('includes/header.php');
-   include('includes/db-config.php');
+   include('includes/init.php');
+  //  include('includes/header.php');
 
-  // Start a session
-   session_start();
-
-   if(!empty($_SESSION['LoggedIn']) && !empty($_SESSION['Email'])) {
-   ?>
-
-     <h1>Member Area</h1>
-     <p>Thanks for logging in! You are <?php echo $_SESSION['Email']?></p>
-
-   <?php
-   } elseif(!empty($_POST['email']) && !empty($_POST['password'])) {
+   if(!empty($_POST['email']) && !empty($_POST['password'])) {
+     // Setup $_POST vars
       $email = mysql_real_escape_string($_POST['email']);
       $password = $_POST['password'];
 
@@ -30,47 +21,48 @@
       }
 
       $dbUserArray = ($results->fetchAll(PDO::FETCH_ASSOC));
+
+      // Vars from DB
+      // First Name
+
+      // echo "<pre>";
+      // var_dump($dbUserArray);
+      // echo "</pre>";
+
+      // User ID from database
+      $UserID = $dbUserArray[0]['UserID'];
+
+      // First Name
+      $firstName = $dbUserArray[0]['First Name'];
+
+      // Last Name
+      $lastName = $dbUserArray[0]['Last Name'];
+
+
       // Password hash from database
       $hash = $dbUserArray[0]['password'];
 
       // use password_verify to match $password from user submitted form against the hash from the database
       if (password_verify($password, $hash)) {
-        echo 'Password is correct!';
-      } else {
-        echo 'Password is incorrect';
-      }
-
-      if(!empty($dbUserArray)) {
-          $email = $dbUserArray[0]['Email'];
-
           // Set session vars for email and logged in state
-          $_SESSION['Email'] = $email;
-          $_SESSION['LoggedIn'] = 1;
+          $email = $dbUserArray[0]['Email'];
+          $_SESSION['Email']      = $email;
+          $_SESSION['LoggedIn']   = 1;
+          $_SESSION['UserID']     = $UserID;
+          $_SESSION['FirstName']  = $firstName;
+          $_SESSION['LastName']   = $lastName;
 
           // Redirect to index.php
           header("Location: index.php");
           exit;
+          ?>
+          <!-- <meta http-equiv="refresh" content="0;index.php"> -->
+          <?php
 
       } else {
           echo "<h1>Error</h1>";
           echo "<p>Sorry, your account could not be found. Please <a href=\"index.php\">click here to try again</a>.</p>";
       }
-  } else {
-      ?>
-
-     <h1>Member Login</h1>
-
-     <p>Thanks for visiting! Please either login below, or <a href="register.php">click here to register</a>.</p>
-
-      <form method="post" action="login.php" name="loginform" id="loginform">
-      <fieldset>
-          <label for="email">Email:</label><input type="text" name="email" id="email" value="richardhuf84@gmail.com" autofocus /><br />
-          <label for="password">Password:</label><input type="password" name="password" id="password" value="messatsu1984" /><br />
-          <input type="submit" name="login" id="login" value="Login" />
-      </fieldset>
-      </form>
-
-     <?php
   }
 
   include('includes/footer.php');

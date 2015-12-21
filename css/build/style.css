@@ -240,7 +240,7 @@ html {
   /* Opera 11.10+ */
   background: -ms-linear-gradient(45deg, #B1E088 0%, #35BCCE 100%);
   /* IE10+ */
-  background: linear-gradient(45deg, #B1E088 0%, #35BCCE 100%);
+  background: linear-gradient(45deg, #b1e088 0%, #35bcce 100%);
   /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$color1', endColorstr='$color2',GradientType=1 );
   /* IE6-9 fallback on horizontal gradient */
@@ -298,21 +298,27 @@ img, object, embed, video {
 }
 
 .site-header {
+  overflow: hidden;
+  *zoom: 1;
   background-color: #FFF;
+  margin-bottom: 30px;
 }
 
 .site-logo {
-  margin: 0 0 20px;
-  padding: 30px 0 30px 30px;
-  text-align: center;
+  margin: 30px 0 0 30px;
 }
 .site-logo a {
   color: #35BCCE;
   text-decoration: none;
 }
 
+.site-tagline {
+  color: #35BCCE;
+  padding-left: 30px;
+}
+
 .page-wrap {
-  margin: 0 auto;
+  margin: 0 auto 0 30px;
   width: 80%;
 }
 
@@ -555,6 +561,8 @@ input[type="number"]:focus {
 }
 
 .ajax-content {
+  overflow: hidden;
+  *zoom: 1;
   padding: 20px 20px 0;
 }
 
@@ -649,6 +657,60 @@ button i {
 
 .has-content .media-type-checkboxes {
   display: block;
+}
+
+.login-out {
+  color: #8758C7;
+  float: right;
+  width: 242px;
+}
+.login-out label {
+  display: block;
+  font-size: 14px;
+}
+.login-out [id="login"] {
+  display: inline-block;
+  border-color: #8758C7;
+  color: #8758C7;
+  font-size: 14px;
+  float: none;
+  line-height: 1.3em;
+  margin: 20px 0 0;
+  padding: 6px;
+  width: inherit;
+}
+.login-out [id="login"]:hover, .login-out [id="login"]:active {
+  background: #8758C7;
+  color: #FFF;
+}
+.login-out input[type="text"],
+.login-out input[type="email"],
+.login-out input[type="password"] {
+  background: #8758C7;
+  color: #FFF;
+  font-size: 14px;
+  line-height: 1.3em;
+}
+.login-out a:link,
+.login-out a:visited {
+  color: #6d3bb1;
+  font-weight: 700;
+}
+.login-out a:hover,
+.login-out a:active {
+  color: #a27ed4;
+}
+
+.login-out > h3 {
+  cursor: pointer;
+}
+
+form[name="loginform"] {
+  display: none;
+}
+
+.logout-link {
+  margin-right: 20px;
 }
 
 /*# sourceMappingURL=style.css.map */

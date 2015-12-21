@@ -1,6 +1,6 @@
 <?php
 
-  include_once('includes/db-config.php');
+  include_once('includes/init.php');
 
   // validate.php performs Create / Delete db functions, then redirects back to index.php
 
@@ -96,7 +96,6 @@
     }
 
     // Delete entry
-    // include('includes/delete.php');
 
     // DELETE
     if($_POST['update'] == 'delete') {

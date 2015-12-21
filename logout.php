@@ -1,11 +1,10 @@
 <?php
-
-  include("includes/header.php");
-  include("includes/db-config.php");
+  include_once("includes/init.php");
 
   $_SESSION = array();
   session_destroy();
-?>
-<meta http-equiv="refresh" content="0;index.php">
 
-<?php include("includes/footer.php"); ?>
+  // Redirect to index.php
+  header("Location: index.php");
+  exit;
+  ?>
