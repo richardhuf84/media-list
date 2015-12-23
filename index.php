@@ -2,6 +2,7 @@
 
   include('includes/init.php');
   include('includes/header.php');
+
 ?>
 
     <section class="page-wrap">

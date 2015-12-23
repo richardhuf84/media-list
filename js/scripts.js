@@ -3,8 +3,6 @@ $(document).ready(function() {
 	var searchField = $('#media-title');
 	var yearField = $('#media-year');
 	var imdbidField = $('#media-imdbid');
-	var typingTimer; //timer identifier
-	var doneTypingInterval = 1000; //time in ms
 
 	// Search OMDB for title
 	function omdbAjaxCall() {
