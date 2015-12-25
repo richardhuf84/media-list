@@ -1,8 +1,8 @@
 $(document).ready(function() {
 
-	var searchField = $('#media-title');
-	var yearField = $('#media-year');
-	var imdbidField = $('#media-imdbid');
+	var searchField 	= $('#media-title');
+	var yearField 		= $('#media-year');
+	var imdbidField 	= $('#media-imdbid');
 
 	// Search OMDB for title
 	function omdbAjaxCall() {
