@@ -15,7 +15,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <!-- Favicons -->
-    <link rel="shortcut icon" sizes="16x16 24x24 32x32 48x48 64x64" href="http://scotch.io/favicon.ico">
+    <!-- <link rel="shortcut icon" sizes="16x16 24x24 32x32 48x48 64x64" href="favicon.ico"> -->
 
     <!-- Open Sans -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
@@ -29,8 +29,7 @@
     <!-- Main stylesheet -->
     <link href='css/build/style.css' rel='stylesheet' type='text/css'>
 
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="js/libs/jquery-2.1.0.min.js"></script>
 
     <!-- Main js file -->
     <script src="js/scripts.min.js"></script>
@@ -46,11 +45,15 @@
 
     <header class="site-header">
         <div class="login-out">
-          <h3><a href="Login">Login</a></h3>
-          <?php
-          // If not logged in, how login form
-          if($_SESSION['LoggedIn'] == 0) { ?>
-          <!-- User login form -->
+          <?php if(!$_COOKIE['authorized']) {
+            echo '<h3><a href="Login">Login</a></h3>';
+          }
+
+          if($_COOKIE['authorized']) {
+            echo "<p>Hi, " . $_COOKIE['first_name'] . "</p>";
+            echo "<p>Your User ID is " . $_SESSION['UserID'] . "</p>";
+            echo "<p class='logout-link'><a href='logout.php'>Logout</a>";
+          } else { ?>
           <form method="post" action="login.php" name="loginform" id="loginform">
           <fieldset>
               <div class="input-wrap">
@@ -58,19 +61,16 @@
               </div>
               <div class="input-wrap">
               <label for="password">Password:</label><input type="password" name="password" id="password" value="" placeholder="Your password" />
+              <div class="input-wrap">
+                <label for="keep-logged-in"><input type="checkbox" id="keep-logged-in" name="keep-logged-in">Keep me logged in</label>
+              </div>
             </div>
               <input type="submit" name="login" id="login" value="Login" />
               <p class="message register">Not yet a member? <a href="register.php">Register</a>.</p>
               <p class="message forgot-password"><a href="forgot-password.php">I forgot my password</a></p>
           </fieldset>
           </form>
-          <?php
-          // else, show logout link
-          } else {
-            echo "<p>Hi, " . $_SESSION['FirstName'] . ".</p>";
-            echo "<p>Your User ID is " . $_SESSION['UserID'] . "</p>";
-            echo "<p class='logout-link'><a href='logout.php'>Logout</a>";
-          } ?>
+          <?php } ?>
         </div>
         <h1 class="site-logo"><a href="/">Media List</a></h1>
         <p class="site-tagline"><em>Keep track of your Blu Ray and DVD collection.</em></p>

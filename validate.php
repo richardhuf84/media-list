@@ -2,17 +2,16 @@
 
   include_once('includes/init.php');
 
-  // validate.php performs Create / Delete db functions, then redirects back to index.php
+  // validate.php performs form validation, then redirects back to index.php
 
   if ($_SERVER["REQUEST_METHOD"] == 'POST') {
 
-    // Create entry
-    // include('includes/create.php');
-
-    // This file creates a new entry in the database
-
-    // CREATE
-    // insert dvd title into the database
+    /**
+     *
+     * CREATE
+     * insert media title into the database
+     *
+     */
 
     // Check for imdbid
     if ($_POST['media-imdbid']) {
@@ -33,6 +32,10 @@
 
         if ($queryForIMDBID[0]['imdbid'] == $mediaIMDBID) {
             $errorMessage = 'This title already exists in the database.';
+
+          // header("Location: index.php");
+          // exit;
+
         } else {
 
             if (isset($_POST['update']) && ($_POST['update'] == 'add')) {
@@ -54,10 +57,10 @@
                     $mediaYear    = $_POST["media-year"];
 
                     // JSON call
-                    $json=file_get_contents("http://www.omdbapi.com/?t=$urlEncodedTitle&y=$mediaYear");
-                    $details=json_decode($json);
+                    $json = file_get_contents("http://www.omdbapi.com/?t=$urlEncodedTitle&y=$mediaYear");
+                    $details = json_decode($json);
 
-                    if ($details->Response=='True') {
+                    if ($details->Response == 'True') {
                         $mediaIMDBID     = $details->imdbID;
                         $mediaPoster     = $details->Poster;
                         $mediaDirector   = $details->Director;
@@ -78,8 +81,12 @@
                         $mediaType = 'dvd';
                     }
 
+                    // UserID
+                    $userID = $_SESSION['UserID'];
+
                     // Insert new dvd item POST values into the database
-                    $sqlInsert = "INSERT INTO media(imdbid, title, year, plot, posterURL, director, genre, media_type) VALUES(
+                    $sqlInsert = "INSERT INTO media(userid, imdbid, title, year, plot, posterURL, director, genre, media_type) VALUES(
+                        '" . $userID . "',
                         '" . $mediaIMDBID . "',
                         '" . $mediaTitle . "',
                         '" . $mediaYear . "',
@@ -89,8 +96,11 @@
                         '" . $mediaGenre . "',
                         '" . $mediaType . "')";
                     $db->exec($sqlInsert);
-
                 }
+
+                // header("Location: index.php");
+                // exit;
+
             }
         }
     }
@@ -100,11 +110,51 @@
     // DELETE
     if($_POST['update'] == 'delete') {
         foreach($_POST['delete'] as $key => $value) {
-            $sqlDelete = "DELETE from media WHERE id = $key";
+            $sqlDelete = "DELETE from media WHERE mediaid = $key";
             $db->exec($sqlDelete);
+
+            // header("Location: index.php");
+            // exit;
         }
     }
 
-    header("Location: index.php");
-    exit;
+    // Register User
+
+    if(!empty($_POST['email']) && !empty($_POST['password'])) {
+      $firstName  = mysql_real_escape_string($_POST['first-name']);
+      $lastName   = mysql_real_escape_string($_POST['last-name']);
+      $email      = mysql_real_escape_string($_POST['email']);
+      $password   = $_POST['password'];
+      $password   = password_hash($password, PASSWORD_DEFAULT);
+      $checkemail = mysql_query("SELECT * FROM users WHERE Email = '" . $email . "'");
+
+      // if(mysql_num_rows($checkemail) == 1) {
+      //   // redirect back to index.php
+      //   // TODO set GET var to alert user that the email already exists in the database
+      //   header("Location: index.php");
+      //   exit;
+      // }
+
+      $registerQuery = "INSERT INTO users(FirstName, LastName, Email, password) VALUES(
+        '" . $firstName . "',
+        '" . $lastName . "',
+        '" . $email . "',
+        '" . $password . "')";
+      $db->exec($registerQuery);
+
+      // if($registerQuery) {
+      //     // TODO set GET var to alert user that their registration is successful, and ask them to login
+      //     header("Location: index.php?registered=true");
+      //     exit;
+      //
+      //   // } else {
+      //   // //  header("Location: register.php");
+      //   // //  exit;
+      //   }
+      // }
+
+      header("Location: index.php");
+      exit;
+
+    }
   }

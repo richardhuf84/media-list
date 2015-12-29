@@ -3,15 +3,13 @@
   include('includes/init.php');
   include('includes/header.php');
 
+  // print $_SERVER['HTTP_REFERER'];
 ?>
 
     <section class="page-wrap">
         <?php if (isset($errorMessage) && !empty($errorMessage)) {
             print "<p class='error-message'>$errorMessage <span class='error-message-close'>X</span></p>";
-        }
-
-        // var_dump($_SESSION);
-        $loggedIn = $_SESSION['LoggedIn']; ?>
+        } ?>
 
         <form class="media-submit-form" method="post" action="validate.php">
             <fieldset class="fieldset-add-title">
@@ -22,7 +20,7 @@
                         <div class="suggestion-strip"></div>
                         <a href="#" class="clear-search">Clear</a>
                         <div class="ajax-content"></div>
-                        <?php if(!empty($loggedIn)) { ?>
+                        <?php if($_COOKIE['authorized']) { ?>
                         <div class="media-type-checkboxes cf">
                             <div class="media-type-wrap">
                                 <input type="radio" name="media-type" value="bluray" id="radio-media-type-bluray" checked="checked">
@@ -44,16 +42,16 @@
                         <?php generateYearOptions(50) ?>
                     </select>
                 </div>
-                <?php if(!empty($loggedIn)) { ?>
+                <?php if($_COOKIE['authorized']) { ?>
                 <input type="text" name="media-imdbid" id="media-imdbid" class="hidden">
                 <button type="submit" name="update" value="add"><i class="fa fa-plus-circle">Add</i></button>
                 <?php } ?>
             </fieldset>
-            <?php if(!empty($loggedIn)) { ?>
+            <?php if($_COOKIE['authorized']) { ?>
             <ul class="dvd-list">
                 <?php
                 foreach ($mediaList as $media) {
-                    $mediaID          = $media['id'];
+                    $mediaID          = $media['mediaid'];
                     $mediaTitle       = $media['title'];
                     $mediaYear        = $media['year'];
                     $mediaPlot        = $media['plot'];

@@ -1,8 +1,8 @@
 $(document).ready(function() {
 
-	var searchField 	= $('#media-title');
-	var yearField 		= $('#media-year');
-	var imdbidField 	= $('#media-imdbid');
+	var searchField = $('#media-title');
+	var yearField = $('#media-year');
+	var imdbidField = $('#media-imdbid');
 
 	// Search OMDB for title
 	function omdbAjaxCall() {
@@ -103,17 +103,12 @@ $(document).ready(function() {
 	$('[name="media-type"]').change(function() {
 		$('.media-type-wrap').removeClass('is-checked');
 		$(this).parent().toggleClass('is-checked');
-
-		// if($(this).is(':checked')) {
-			// $(this).parent().toggleClass('is-checked');
-		// } else {
-		// }
 	});
 
 	// Check all delete checkboxes
 	$('#check-all-delete').click(function() {
 
-		// If this check all checkbox is checked
+		// If 'check all' checkbox is checked
 		if($(this).is(':checked')) {
 
 			// Check all delete checkboxes

@@ -94,7 +94,7 @@ img, object, embed, video {
 }
 
 @media screen and (min-width: 720px) {
-	.page-wrap{
+	.page-wrap {
 		width: 40%;
 	}
 }
@@ -471,6 +471,10 @@ button i {
 	a:active {
 		color: lighten($color3, 10%);
 	}
+}
+
+input[type="checkbox"] {
+	margin-right: 5px;
 }
 
 .login-out > h3 {

@@ -701,6 +701,10 @@ button i {
   color: #a27ed4;
 }
 
+input[type="checkbox"] {
+  margin-right: 5px;
+}
+
 .login-out > h3 {
   cursor: pointer;
 }
