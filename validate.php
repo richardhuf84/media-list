@@ -126,14 +126,24 @@
       $email      = mysql_real_escape_string($_POST['email']);
       $password   = $_POST['password'];
       $password   = password_hash($password, PASSWORD_DEFAULT);
-      $checkemail = mysql_query("SELECT * FROM users WHERE Email = '" . $email . "'");
 
-      // if(mysql_num_rows($checkemail) == 1) {
-      //   // redirect back to index.php
-      //   // TODO set GET var to alert user that the email already exists in the database
-      //   header("Location: index.php");
-      //   exit;
-      // }
+      // Check if email already exists in database
+      try {
+          $checkEmailExists = $db->query("SELECT * FROM users WHERE Email = '" . $email . "'");
+      } catch (Exception $e){
+          echo "Data could not be retrieved from the database.";
+          exit;
+      }
+
+      print $checkEmailExists;
+
+      if(mysql_num_rows($results) == 1) {
+        echo 'Email already exists';
+        // redirect back to index.php
+        // TODO set GET var to alert user that the email already exists in the database
+        header("Location: index.php?registration=true&emailexists=true");
+        exit;
+      }
 
       $registerQuery = "INSERT INTO users(FirstName, LastName, Email, password) VALUES(
         '" . $firstName . "',

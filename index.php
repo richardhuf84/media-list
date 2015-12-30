@@ -48,7 +48,7 @@
                 <?php } ?>
             </fieldset>
             <?php if($_COOKIE['authorized']) { ?>
-            <ul class="dvd-list">
+            <ul class="media-list">
                 <?php
                 foreach ($mediaList as $media) {
                     $mediaID          = $media['mediaid'];

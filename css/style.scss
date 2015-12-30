@@ -3,6 +3,7 @@ $color2: #35BCCE; // Blue
 $color3: #8758C7; // Purple
 $color4: #000;    // Black
 $color5: #FFF;    // White
+$color6: #3D3D3E; // Dark Grey
 
 @import "normalize";
 @import "compass";
@@ -30,6 +31,10 @@ body {
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
     margin: 0;
+}
+
+label {
+	cursor: pointer;
 }
 
 /**
@@ -117,7 +122,7 @@ img, object, embed, video {
  	margin: 10px;
 }
 
-.dvd-list {
+.media-list {
 	margin: 0;
 	padding: 0;
 	list-style: none;
@@ -424,8 +429,8 @@ button i {
 	display: block;
 }
 
-.login-out {
-	color: $color3;
+.user-profile {
+	color: $color5;
 	float: right;
 	width: 242px;
 
@@ -436,8 +441,9 @@ button i {
 
 	[id="login"] {
 		display: inline-block;
-		border-color: $color3;
-		color: $color3;
+		background: $color3;
+		border: 0;
+		color: $color5;
 		font-size: 14px;
 		float: none;
 		line-height: 1.3em;
@@ -455,26 +461,42 @@ button i {
 	input[type="text"],
 	input[type="email"],
 	input[type="password"] {
+		-webkit-appearance: none;
 		background: $color3;
+		border: 0;
 		color: $color5;
 		font-size: 14px;
 		line-height: 1.3em;
+		margin-bottom: 20px;
 	}
 
 	a:link,
 	a:visited {
-		color: darken($color3, 10%);
+		color: darken($color5, 10%);
 		font-weight: 700;
 	}
 
 	a:hover,
 	a:active {
-		color: lighten($color3, 10%);
+		color: darken($color5, 20%);
 	}
 }
 
 input[type="checkbox"] {
 	margin-right: 5px;
+}
+
+.user-profile {
+	background-color: $color6;
+	padding: 20px;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	top: 0;
+}
+
+.profile-image {
+	@include border-radius(40px);
 }
 
 .login-out > h3 {
@@ -483,7 +505,7 @@ input[type="checkbox"] {
 
 // Hide login form initially, to be toggled with js
 form[name="loginform"] {
-	display: none;
+	// display: none;
 }
 
 .logout-link {

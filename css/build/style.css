@@ -259,6 +259,10 @@ body {
   margin: 0;
 }
 
+label {
+  cursor: pointer;
+}
+
 /**
  * For modern browsers
  * 1. The space content is one way to avoid an Opera bug when the
@@ -345,7 +349,7 @@ img, object, embed, video {
   margin: 10px;
 }
 
-.dvd-list {
+.media-list {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -659,19 +663,20 @@ button i {
   display: block;
 }
 
-.login-out {
-  color: #8758C7;
+.user-profile {
+  color: #FFF;
   float: right;
   width: 242px;
 }
-.login-out label {
+.user-profile label {
   display: block;
   font-size: 14px;
 }
-.login-out [id="login"] {
+.user-profile [id="login"] {
   display: inline-block;
-  border-color: #8758C7;
-  color: #8758C7;
+  background: #8758C7;
+  border: 0;
+  color: #FFF;
   font-size: 14px;
   float: none;
   line-height: 1.3em;
@@ -679,38 +684,52 @@ button i {
   padding: 6px;
   width: inherit;
 }
-.login-out [id="login"]:hover, .login-out [id="login"]:active {
+.user-profile [id="login"]:hover, .user-profile [id="login"]:active {
   background: #8758C7;
   color: #FFF;
 }
-.login-out input[type="text"],
-.login-out input[type="email"],
-.login-out input[type="password"] {
+.user-profile input[type="text"],
+.user-profile input[type="email"],
+.user-profile input[type="password"] {
+  -webkit-appearance: none;
   background: #8758C7;
+  border: 0;
   color: #FFF;
   font-size: 14px;
   line-height: 1.3em;
+  margin-bottom: 20px;
 }
-.login-out a:link,
-.login-out a:visited {
-  color: #6d3bb1;
+.user-profile a:link,
+.user-profile a:visited {
+  color: #e6e6e6;
   font-weight: 700;
 }
-.login-out a:hover,
-.login-out a:active {
-  color: #a27ed4;
+.user-profile a:hover,
+.user-profile a:active {
+  color: #cccccc;
 }
 
 input[type="checkbox"] {
   margin-right: 5px;
 }
 
-.login-out > h3 {
-  cursor: pointer;
+.user-profile {
+  background-color: #3D3D3E;
+  padding: 20px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  top: 0;
 }
 
-form[name="loginform"] {
-  display: none;
+.profile-image {
+  -moz-border-radius: 40px;
+  -webkit-border-radius: 40px;
+  border-radius: 40px;
+}
+
+.login-out > h3 {
+  cursor: pointer;
 }
 
 .logout-link {

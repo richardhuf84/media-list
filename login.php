@@ -61,11 +61,11 @@
           setcookie('first_name', $firstName, time() + $cookieExpires);
       }
 
-      // If keep logged in is checked, we set a value in the db, to be used with a session
-      if($_POST['keep-logged-in']){
-        $keepLoggedInQuery = mysql_query("INSERT INTO users(keeploggedin) VALUES('true')");
-        $db->exec($keepLoggedInQuery);
-      }
+      // // If keep logged in is checked, we set a value in the db, to be used with a session
+      // if($_POST['keep-logged-in']){
+      //   $keepLoggedInQuery = mysql_query("INSERT INTO users(keeploggedin) VALUES('true')");
+      //   $db->exec($keepLoggedInQuery);
+      // }
 
       // Redirect to index.php
       header("Location: index.php");

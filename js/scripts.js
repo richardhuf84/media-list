@@ -130,7 +130,7 @@ $(document).ready(function() {
 	});
 
 	// Login Toggle
-	$('.login-out > h3').click(function(e) {
+	$('.user-profile > h3').click(function(e) {
 		e.preventDefault();
 		$('form[name="loginform"]').slideToggle(300);
 	});
