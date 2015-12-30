@@ -7,8 +7,8 @@
    *
    */
 
-  include('includes/header.php');
-  include('includes/init.php');
+  include_once('includes/config.php');
+  include_once('includes/header.php');
 
   ?>
     <h1>Register</h1>

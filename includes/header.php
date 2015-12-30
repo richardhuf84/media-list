@@ -43,15 +43,18 @@
 </head>
 <body>
 
+    <?php include_once('config.php'); ?>
+
     <header class="site-header">
         <div class="user-profile">
           <?php
           if($_COOKIE['authorized']) {
             echo get_gravatar('richardhuf84@gmail.com', 80, '404', 'pg', True, [
               'class'=>'profile-image',
-              'alt'=> $_SESSION['FirstName']
+              // FIXME change alt to output name
+              'alt'=> 'alt'
                ]);
-            echo "<p>Hi, " . $_COOKIE['first_name'] . "</p>";
+            echo "<p>Hi, " . user_details('first', 'last', 'userid', 'email') . "</p>";
             echo "<p>Your User ID is " . $_SESSION['UserID'] . "</p>";
             echo "<p class='logout-link'><a href='logout.php'>Logout</a>";
           } else { ?>

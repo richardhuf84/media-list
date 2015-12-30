@@ -1,10 +1,11 @@
 <?php
 
+  // DB config
+  include_once('includes/config.php');
+
   /*
    * User login page
    */
-
-   include('includes/init.php');
 
    if(!empty($_POST['email']) && !empty($_POST['password'])) {
       // Setup $_POST vars

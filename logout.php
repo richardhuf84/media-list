@@ -1,5 +1,4 @@
 <?php
-  include_once("includes/init.php");
 
   // remove all session variables
   session_unset();

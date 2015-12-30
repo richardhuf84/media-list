@@ -1,8 +1,8 @@
 <?php
 
-  include_once('includes/init.php');
+  include_once('includes/config.php');
 
-  // validate.php performs form validation, then redirects back to index.php
+  // validate.php performs form validation and CRUD operations, then redirects back to index.php
 
   if ($_SERVER["REQUEST_METHOD"] == 'POST') {
 
@@ -134,8 +134,6 @@
           echo "Data could not be retrieved from the database.";
           exit;
       }
-
-      print $checkEmailExists;
 
       if(mysql_num_rows($results) == 1) {
         echo 'Email already exists';

@@ -430,8 +430,13 @@ button i {
 }
 
 .user-profile {
+	background-color: $color6;
+	bottom: 0;
 	color: $color5;
-	float: right;
+	padding: 20px;
+	position: fixed;
+	right: 0;
+	top: 0;
 	width: 242px;
 
 	label {
@@ -486,21 +491,8 @@ input[type="checkbox"] {
 	margin-right: 5px;
 }
 
-.user-profile {
-	background-color: $color6;
-	padding: 20px;
-	position: absolute;
-	right: 0;
-	bottom: 0;
-	top: 0;
-}
-
 .profile-image {
 	@include border-radius(40px);
-}
-
-.login-out > h3 {
-	cursor: pointer;
 }
 
 // Hide login form initially, to be toggled with js

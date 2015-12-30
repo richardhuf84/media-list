@@ -664,8 +664,13 @@ button i {
 }
 
 .user-profile {
+  background-color: #3D3D3E;
+  bottom: 0;
   color: #FFF;
-  float: right;
+  padding: 20px;
+  position: fixed;
+  right: 0;
+  top: 0;
   width: 242px;
 }
 .user-profile label {
@@ -713,23 +718,10 @@ input[type="checkbox"] {
   margin-right: 5px;
 }
 
-.user-profile {
-  background-color: #3D3D3E;
-  padding: 20px;
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  top: 0;
-}
-
 .profile-image {
   -moz-border-radius: 40px;
   -webkit-border-radius: 40px;
   border-radius: 40px;
-}
-
-.login-out > h3 {
-  cursor: pointer;
 }
 
 .logout-link {

@@ -1,9 +1,14 @@
 <?php
 
-  include('includes/init.php');
-  include('includes/header.php');
+  // Include site config
+  include_once('config.php');
 
-  // print $_SERVER['HTTP_REFERER'];
+  // Read entries
+  include_once('read.php');
+
+  // Include page header
+  include_once('includes/header.php');
+
 ?>
 
     <section class="page-wrap">
