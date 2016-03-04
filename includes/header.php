@@ -43,8 +43,6 @@
 </head>
 <body>
 
-    <?php include_once('config.php'); ?>
-
     <header class="site-header">
         <div class="user-profile">
           <?php

@@ -15,7 +15,8 @@
    /**
     * Enable PHP Error reporting
     */
-  //  error_reporting(E_ALL); ini_set('display_errors', 'On');
+   error_reporting(E_ALL);
+   ini_set('display_errors', 'On');
 
 
   /**
@@ -102,3 +103,20 @@
       $output = $atts['first'] == 'first' ? 'first name from DB' : '';
       return $output;
     }
+
+    /**
+     * Read data from database
+     */
+
+     if(isset($_SESSION) && isset($_SESSION['UserID'])) {
+
+       // READ
+       try {
+           $results = $db->query("SELECT mediaid, title, year, plot, posterURL, director, genre, media_type FROM media WHERE userID = " . $_SESSION['UserID'] . " ORDER BY mediaid DESC");
+       } catch (Exception $e){
+           echo "Data could not be retrieved from the database.";
+           exit;
+       }
+
+       $mediaList = ($results->fetchAll(PDO::FETCH_ASSOC));
+     }

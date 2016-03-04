@@ -98,8 +98,8 @@
                     $db->exec($sqlInsert);
                 }
 
-                // header("Location: index.php");
-                // exit;
+                header("Location: index.php");
+                exit;
 
             }
         }
@@ -113,8 +113,8 @@
             $sqlDelete = "DELETE from media WHERE mediaid = $key";
             $db->exec($sqlDelete);
 
-            // header("Location: index.php");
-            // exit;
+            header("Location: index.php");
+            exit;
         }
     }
 

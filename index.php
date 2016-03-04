@@ -1,10 +1,7 @@
 <?php
 
   // Include site config
-  include_once('config.php');
-
-  // Read entries
-  include_once('read.php');
+  include_once('includes/config.php');
 
   // Include page header
   include_once('includes/header.php');
@@ -25,7 +22,7 @@
                         <div class="suggestion-strip"></div>
                         <a href="#" class="clear-search">Clear</a>
                         <div class="ajax-content"></div>
-                        <?php if($_COOKIE['authorized']) { ?>
+                        <?php if(isset($_COOKIE['authorized'])) { ?>
                         <div class="media-type-checkboxes cf">
                             <div class="media-type-wrap">
                                 <input type="radio" name="media-type" value="bluray" id="radio-media-type-bluray" checked="checked">
@@ -47,12 +44,12 @@
                         <?php generateYearOptions(50) ?>
                     </select>
                 </div>
-                <?php if($_COOKIE['authorized']) { ?>
+                <?php if(isset($_COOKIE['authorized'])) { ?>
                 <input type="text" name="media-imdbid" id="media-imdbid" class="hidden">
                 <button type="submit" name="update" value="add"><i class="fa fa-plus-circle">Add</i></button>
                 <?php } ?>
             </fieldset>
-            <?php if($_COOKIE['authorized']) { ?>
+            <?php if(isset($_COOKIE['authorized'])) { ?>
             <ul class="media-list">
                 <?php
                 foreach ($mediaList as $media) {
