@@ -19,15 +19,15 @@
     <fieldset>
       <div class="input-wrap">
           <label for="first-name">First Name:</label>
-          <input type="text" name="first-name" id="first-name" value="Melissa" />
+          <input type="text" name="first-name" id="first-name" value="Richard" />
       </div>
       <div class="input-wrap">
           <label for="last-name">Last Name:</label>
-          <input type="text" name="last-name" id="last-name" value="Marshall" />
+          <input type="text" name="last-name" id="last-name" value="Huf" />
       </div>
       <div class="input-wrap">
           <label for="email">Email Address:</label>
-          <input type="text" name="email" id="email" value="melissa01@gmail.com" />
+          <input type="text" name="email" id="email" value="richardhuf84@gmail.com" />
       </div>
       <div class="input-wrap">
           <label for="password">Password:</label>

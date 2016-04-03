@@ -10,7 +10,7 @@
    if(!empty($_POST['email']) && !empty($_POST['password'])) {
       // Setup $_POST vars
       // TODO replace with PDO alternative
-      $email = mysql_real_escape_string($_POST['email']);
+      $email = $_POST['email'];
       $password = $_POST['password'];
 
       // Lookup users table for email address and get password hash

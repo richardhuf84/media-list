@@ -46,7 +46,7 @@
     <header class="site-header">
         <div class="user-profile">
           <?php
-          if($_COOKIE['authorized']) {
+          if(isset($_COOKIE['authorized'])) {
             echo get_gravatar('richardhuf84@gmail.com', 80, '404', 'pg', True, [
               'class'=>'profile-image',
               // FIXME change alt to output name

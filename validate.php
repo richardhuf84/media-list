@@ -14,7 +14,7 @@
      */
 
     // Check for imdbid
-    if ($_POST['media-imdbid']) {
+    if (isset($_POST['media-imdbid'])) {
 
         $mediaIMDBID = trim($_POST['media-imdbid']);
         $mediaIMDBID = filter_var($mediaIMDBID, FILTER_SANITIZE_STRING);
@@ -108,7 +108,7 @@
     // Delete entry
 
     // DELETE
-    if($_POST['update'] == 'delete') {
+    if(isset($_POST['update']) && $_POST['update']  == 'delete') {
         foreach($_POST['delete'] as $key => $value) {
             $sqlDelete = "DELETE from media WHERE mediaid = $key";
             $db->exec($sqlDelete);
@@ -121,9 +121,9 @@
     // Register User
 
     if(!empty($_POST['email']) && !empty($_POST['password'])) {
-      $firstName  = mysql_real_escape_string($_POST['first-name']);
-      $lastName   = mysql_real_escape_string($_POST['last-name']);
-      $email      = mysql_real_escape_string($_POST['email']);
+      $firstName  = $_POST['first-name'];
+      $lastName   = $_POST['last-name'];
+      $email      = $_POST['email'];
       $password   = $_POST['password'];
       $password   = password_hash($password, PASSWORD_DEFAULT);
 
@@ -135,13 +135,15 @@
           exit;
       }
 
-      if(mysql_num_rows($results) == 1) {
-        echo 'Email already exists';
-        // redirect back to index.php
-        // TODO set GET var to alert user that the email already exists in the database
-        header("Location: index.php?registration=true&emailexists=true");
-        exit;
-      }
+      //var_dump($checkEmailExists);
+
+      // if($checkEmailExists) == 1) {
+      //   echo 'Email already exists';
+      //   // redirect back to index.php
+      //   // TODO set GET var to alert user that the email already exists in the database
+      //   header("Location: index.php?registration=true&emailexists=true");
+      //   exit;
+      // }
 
       $registerQuery = "INSERT INTO users(FirstName, LastName, Email, password) VALUES(
         '" . $firstName . "',
@@ -161,8 +163,51 @@
       //   }
       // }
 
-      header("Location: index.php");
-      exit;
+      // Send an email to tell the user that they have registered.
+      // We use Gmail's SMTP server
+      $mail = new PHPMailer;
+
+      //Enable SMTP debugging.
+      $mail->SMTPDebug = 3;
+      //Set PHPMailer to use SMTP.
+      $mail->isSMTP();
+      //Set SMTP host name
+      $mail->Host = "smtp.gmail.com";
+      //Set this to true if SMTP host requires authentication to send email
+      $mail->SMTPAuth = true;
+      //Provide username and password
+      $mail->Username = "richardhuf84@gmail.com";
+      $mail->Password = "messatsu";
+      //If SMTP requires TLS encryption then set it
+      $mail->SMTPSecure = "tls";
+      //Set TCP port to connect to
+      $mail->Port = 587;
+
+      $mail->From = "richardhuf84@gmail.com";
+      $mail->FromName = "Media List";
+
+      $mail->addAddress("richardhuf84@gmail.com", "Richard");
+
+      $mail->isHTML(true);
+
+      $mail->Subject = "Welcome to the Media List App!";
+      $mail->Body = "<i>Congratulations</i>";
+      $mail->AltBody = "This is the plain text version of the email content";
+
+      if(!$mail->send()) {
+          echo "Mailer Error: " . $mail->ErrorInfo;
+      } else {
+          echo "Message has been sent successfully";
+      }
+
+      if(!$mail->send()) {
+          echo "Mailer Error: " . $mail->ErrorInfo;
+      } else {
+          echo "Message has been sent successfully";
+      }
+
+      //header("Location: index.php");
+      //exit;
 
     }
   }
