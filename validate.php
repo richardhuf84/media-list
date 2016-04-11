@@ -121,9 +121,9 @@
     // Register User
 
     if(!empty($_POST['email']) && !empty($_POST['password'])) {
-      $firstName  = $_POST['first-name'];
-      $lastName   = $_POST['last-name'];
-      $email      = $_POST['email'];
+      global $firstName  = $_POST['first-name'];
+      global $lastName   = $_POST['last-name'];
+      global $email      = $_POST['email'];
       $password   = $_POST['password'];
       $password   = password_hash($password, PASSWORD_DEFAULT);
 
@@ -165,49 +165,49 @@
 
       // Send an email to tell the user that they have registered.
       // We use Gmail's SMTP server
-      $mail = new PHPMailer;
+      // $mail = new PHPMailer;
+      //
+      // //Enable SMTP debugging.
+      // $mail->SMTPDebug = 3;
+      // //Set PHPMailer to use SMTP.
+      // $mail->isSMTP();
+      // //Set SMTP host name
+      // $mail->Host = "smtp.gmail.com";
+      // //Set this to true if SMTP host requires authentication to send email
+      // $mail->SMTPAuth = true;
+      // //Provide username and password
+      // $mail->Username = "richardhuf84@gmail.com";
+      // $mail->Password = "messatsu";
+      // //If SMTP requires TLS encryption then set it
+      // $mail->SMTPSecure = "tls";
+      // //Set TCP port to connect to
+      // $mail->Port = 587;
+      //
+      // $mail->From = "richardhuf84@gmail.com";
+      // $mail->FromName = "Media List";
+      //
+      // $mail->addAddress("richardhuf84@gmail.com", "Richard");
+      //
+      // $mail->isHTML(true);
+      //
+      // $mail->Subject = "Welcome to the Media List App!";
+      // $mail->Body = "<i>Congratulations</i>";
+      // $mail->AltBody = "This is the plain text version of the email content";
+      //
+      // if(!$mail->send()) {
+      //     echo "Mailer Error: " . $mail->ErrorInfo;
+      // } else {
+      //     echo "Message has been sent successfully";
+      // }
+      //
+      // if(!$mail->send()) {
+      //     echo "Mailer Error: " . $mail->ErrorInfo;
+      // } else {
+      //     echo "Message has been sent successfully";
+      // }
 
-      //Enable SMTP debugging.
-      $mail->SMTPDebug = 3;
-      //Set PHPMailer to use SMTP.
-      $mail->isSMTP();
-      //Set SMTP host name
-      $mail->Host = "smtp.gmail.com";
-      //Set this to true if SMTP host requires authentication to send email
-      $mail->SMTPAuth = true;
-      //Provide username and password
-      $mail->Username = "richardhuf84@gmail.com";
-      $mail->Password = "messatsu";
-      //If SMTP requires TLS encryption then set it
-      $mail->SMTPSecure = "tls";
-      //Set TCP port to connect to
-      $mail->Port = 587;
-
-      $mail->From = "richardhuf84@gmail.com";
-      $mail->FromName = "Media List";
-
-      $mail->addAddress("richardhuf84@gmail.com", "Richard");
-
-      $mail->isHTML(true);
-
-      $mail->Subject = "Welcome to the Media List App!";
-      $mail->Body = "<i>Congratulations</i>";
-      $mail->AltBody = "This is the plain text version of the email content";
-
-      if(!$mail->send()) {
-          echo "Mailer Error: " . $mail->ErrorInfo;
-      } else {
-          echo "Message has been sent successfully";
-      }
-
-      if(!$mail->send()) {
-          echo "Mailer Error: " . $mail->ErrorInfo;
-      } else {
-          echo "Message has been sent successfully";
-      }
-
-      //header("Location: index.php");
-      //exit;
+      header("Location: index.php");
+      exit;
 
     }
   }

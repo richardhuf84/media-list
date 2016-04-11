@@ -52,6 +52,7 @@
               // FIXME change alt to output name
               'alt'=> 'alt'
                ]);
+               echo $firstName;
             echo "<p>Hi, " . user_details('first', 'last', 'userid', 'email') . "</p>";
             echo "<p>Your User ID is " . $_SESSION['UserID'] . "</p>";
             echo "<p class='logout-link'><a href='logout.php'>Logout</a>";

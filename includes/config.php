@@ -30,7 +30,7 @@
   //connectToDB();
 
   try {
-     $db = new PDO("mysql:host=localhost;dbname=media;port=8889","root","root");
+     $db = new PDO("mysql:host=localhost;dbname=media;port=3306","root","root");
      $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
      $db->exec("SET NAMES 'utf8'");
    } catch (Exception $e) {
@@ -53,13 +53,6 @@
        print "<option value='" . $previousYear . "'>" . $previousYear . "</option>";
     }
   }
-
-  /**
-   * @return base URL
-   */
-   function base_url() {
-     return "http://localhost:8888/media-list";
-   }
 
   /**
    * Get either a Gravatar URL or complete image tag for a specified email address.
@@ -124,4 +117,16 @@
        }
 
        $mediaList = ($results->fetchAll(PDO::FETCH_ASSOC));
+
+      //  var_dump ()$_SESSION['UserID']);
+
+       // Set variable for users first name
+      //  try {
+      //    $firstNameQuery = $db->query("SELECT FirstName FROM users WHERE UserID = 41")
+      //  } catch (Exception $e){
+      //      echo "Data could not be retrieved from the database.";
+      //      exit;
+      //  }
+       //
+      //  $firstName = ($firstNameQuery->fetchAll(PDO::FETCH_ASSOC));
      }

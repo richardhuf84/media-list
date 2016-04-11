@@ -27,18 +27,22 @@
       $UserID = $dbUserArray[0]['UserID'];
 
       // First Name
-      $firstName = $dbUserArray[0]['First Name'];
+      $firstName = $dbUserArray[0]['FirstName'];
 
       // Last Name
-      $lastName = $dbUserArray[0]['Last Name'];
+      $lastName = $dbUserArray[0]['LastName'];
+
+      // Keep Logged In
+      $keepLoggedIn = $dbUserArray[0]['KeepLoggedIn'];
 
       // Password hash from database
-      $hash = $dbUserArray[0]['password'];
+      $hash = $dbUserArray[0]['Password'];
 
       // use password_verify to match $password from user submitted form against the hash from the database
       if (password_verify($password, $hash)) {
           // Set session vars for email and logged in state
           $email = $dbUserArray[0]['Email'];
+          //var_dump($_SESSION);
           $_SESSION['Email']        = $email;
           $_SESSION['UserID']       = $UserID;
           $_SESSION['FirstName']    = $firstName;
@@ -63,16 +67,14 @@
       }
 
       // // If keep logged in is checked, we set a value in the db, to be used with a session
-      // if($_POST['keep-logged-in']){
-      //   $keepLoggedInQuery = mysql_query("INSERT INTO users(keeploggedin) VALUES('true')");
-      //   $db->exec($keepLoggedInQuery);
-      // }
+      if($_POST['keep-logged-in'] !== NULL){
+        $keepLoggedInQuery = mysql_query("INSERT INTO users(KeepLoggedIn) VALUES(1)");
+        $db->exec($keepLoggedInQuery);
+      }
 
       // Redirect to index.php
       header("Location: index.php");
       exit;
   }
-
-  include('includes/footer.php');
 
 ?>
