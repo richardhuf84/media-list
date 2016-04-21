@@ -4,6 +4,14 @@
    * file: config.php
    */
 
+
+   /**
+   *****************************************************************************
+   * TODO - refactor everything to use a database class.
+   * http://culttt.com/2012/10/01/roll-your-own-pdo-php-class/
+   */
+
+
    // Load functions.php
    //  include_once('../functions.php');
 
