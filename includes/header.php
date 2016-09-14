@@ -66,7 +66,7 @@
               <div class="input-wrap">
               <label for="password">Password:</label><input type="password" name="password" id="password" value="" placeholder="Your password" />
               <div class="input-wrap">
-                <label for="keep-logged-in"><input type="checkbox" id="keep-logged-in" name="keep-logged-in">Keep me logged in</label>
+                <label for="keep-logged-in"><input type="checkbox" id="keep-logged-in" name="keep_logged_in">Keep me logged in</label>
               </div>
             </div>
               <input type="submit" name="login" id="login" value="Login" />

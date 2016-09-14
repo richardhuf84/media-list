@@ -17,7 +17,7 @@
       try {
           $results = $db->query("SELECT * FROM users WHERE Email =  '" . $email . "'");
       } catch (Exception $e){
-          echo "Your email ould not be found in the database..";
+          echo "Your email could not be found in the database..";
           exit;
       }
 
@@ -47,7 +47,8 @@
           $_SESSION['UserID']       = $UserID;
           $_SESSION['FirstName']    = $firstName;
           $_SESSION['LastName']     = $lastName;
-          $_SESSION['KeepLoggedIn'] = $KeepLoggedIn;
+          var_dump($_SESSION);
+          $_SESSION['keep_logged_in'] = $KeepLoggedIn;
 
           // Set Cookie to track sessionID
           $cookieName     = "SessionID";
@@ -67,7 +68,7 @@
       }
 
       // // If keep logged in is checked, we set a value in the db, to be used with a session
-      if($_POST['keep-logged-in'] !== NULL){
+      if($_POST['keep_logged_in'] !== NULL){
         $keepLoggedInQuery = mysql_query("INSERT INTO users(KeepLoggedIn) VALUES(1)");
         $db->exec($keepLoggedInQuery);
       }
