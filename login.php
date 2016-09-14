@@ -47,8 +47,9 @@
           $_SESSION['UserID']       = $UserID;
           $_SESSION['FirstName']    = $firstName;
           $_SESSION['LastName']     = $lastName;
-          var_dump($_SESSION);
-          $_SESSION['keep_logged_in'] = $KeepLoggedIn;
+          if (isset($_SESSION['keep_logged_in']) {
+            $_SESSION['keep_logged_in'] = $KeepLoggedIn;
+          }
 
           // Set Cookie to track sessionID
           $cookieName     = "SessionID";

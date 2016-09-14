@@ -5,13 +5,6 @@
    */
 
 
-   /**
-   *****************************************************************************
-   * TODO - refactor everything to use a database class.
-   * http://culttt.com/2012/10/01/roll-your-own-pdo-php-class/
-   */
-
-
    // Load functions.php
    //  include_once('../functions.php');
 
@@ -36,28 +29,16 @@
    */
 
 
+   try {
+      $db = new PDO("mysql:host=localhost;dbname=media;port=8889","root","root");
+      $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+      $db->exec("SET NAMES 'utf8'");
+    } catch (Exception $e) {
+      echo "Could not connect to database";
+      exit;
+    }
 
-  try {
-     $db = new PDO("mysql:host=localhost;dbname=media;port=3306","root","root");
-     $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-     $db->exec("SET NAMES 'utf8'");
-   } catch (Exception $e) {
-     echo "Could not connect to database";
-     exit;
-   }
 
-  // Include database class
-  // include 'database.class.php';
-
-  // Define configuration
-  // define("DB_HOST", "localhost");
-  // define("DB_USER", "root");
-  // define("DB_PASS", "root");
-  // define("DB_NAME", "media");
-
-  // $database = new Database();
-
-  // $database->query('INSERT INTO mytable (FName, LName, Age, Gender) VALUES (:fname, :lname, :age, :gender)');
 
  /**
   * Global Functions
@@ -127,20 +108,19 @@
      * Read data from database
      */
 
-     // TODO: add back in
      if(isset($_SESSION) && isset($_SESSION['UserID'])) {
+
 
        // READ
        try {
-           $medialist = $db->query("SELECT mediaid, title, year, plot, posterURL, director, genre, media_type FROM media WHERE userID = " . $_SESSION['UserID'] . " ORDER BY mediaid DESC");
+           $results = $db->query("SELECT mediaid, title, year, plot, posterURL, director, genre, media_type FROM media WHERE userID = " . $_SESSION['UserID'] . " ORDER BY mediaid DESC");
        } catch (Exception $e){
            echo "Data could not be retrieved from the database.";
            exit;
        }
 
-      //  $mediaList = ($results->fetchAll(PDO::FETCH_ASSOC));
+       $mediaList = ($results->fetchAll(PDO::FETCH_ASSOC));
 
-      //  var_dump ()$_SESSION['UserID']);
 
        // Set variable for users first name
       //  try {
@@ -149,6 +129,6 @@
       //      echo "Data could not be retrieved from the database.";
       //      exit;
       //  }
-       //
+      //
       //  $firstName = ($firstNameQuery->fetchAll(PDO::FETCH_ASSOC));
      }
