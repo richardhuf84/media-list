@@ -11,10 +11,11 @@
    /**
     * If session is not started, start one.
     */
-   if($_SESSION == 0) {
-     session_start();
-     $sessionID = session_id();
-   }
+
+    if (session_status() == PHP_SESSION_NONE) {
+      session_start();
+      $sessionID = session_id();
+    }
 
    /**
     * Enable PHP Error reporting
@@ -99,10 +100,11 @@
       'userid' => 'userid',
       'email' => 'email'
     ];
-    function user_details( $atts ) {
-      $output = $atts['first'] == 'first' ? 'first name from DB' : '';
-      return $output;
-    }
+
+    // function user_details( $first ) {
+    //   $output = $atts['first'] == 'first' ? $_COOKIE['first_name'] : '';
+    //   return $output;
+    // }
 
     /**
      * Read data from database
