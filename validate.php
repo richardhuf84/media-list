@@ -1,6 +1,6 @@
 <?php
 
-  // include_once('includes/config.php');
+  include_once('includes/config.php');
 
   // validate.php performs form validation and CRUD operations, then redirects back to index.php
 
@@ -105,7 +105,7 @@
 
             }
         }
-  //   }
+    }
   //
   //   // Delete entry
   //
@@ -211,5 +211,5 @@
   //     header("Location: index.php");
   //     exit;
   // //
-  //   }
+    }
   }

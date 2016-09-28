@@ -52,13 +52,13 @@
               // FIXME change alt to output name
               'alt'=> 'alt'
                ]);
-               echo $_COOKIE['first_name'];
+            echo $_COOKIE['first_name'];
             echo "<p>Hi, " . $_COOKIE['first_name'] . "</p>";
             echo "<p>Your User ID is " . $_SESSION['UserID'] . "</p>";
             echo "<p class='logout-link'><a href='logout.php'>Logout</a>";
           } else { ?>
           <h3>Login</h3>
-          <form method="post" action="login.php" name="loginform" id="loginform">
+          <form method="POST" action="login.php" name="loginform" id="loginform">
           <fieldset>
               <div class="input-wrap">
                 <label for="email">Email:</label><input type="text" name="email" id="email" value="richardhuf84@gmail.com" placeholder="Email Address" autofocus />

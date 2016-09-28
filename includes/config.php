@@ -30,15 +30,24 @@
    */
 
 
-   try {
-      $db = new PDO("mysql:host=localhost;dbname=media;port=8889","root","root");
-      $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-      $db->exec("SET NAMES 'utf8'");
-    } catch (Exception $e) {
-      echo "Could not connect to database";
-      exit;
-    }
+   // OLD CONNECTION
+  //  try {
+  //     $db = new PDO("mysql:host=localhost;dbname=media;port=3306","root","root");
+  //     $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+  //     $db->exec("SET NAMES 'utf8'");
+  //   } catch (PDOException $e) {
+  //     echo "Could not connect to database";
+  //     exit;
+  //   }
 
+  // NEW CONNECTION
+
+  DEFINE('DB_USERNAME', 'root');
+  DEFINE('DB_PASSWORD', 'root');
+  DEFINE('DB_HOST', 'localhost');
+  DEFINE('DB_DATABASE', 'media');
+
+  
 
 
  /**
@@ -101,10 +110,10 @@
       'email' => 'email'
     ];
 
-    // function user_details( $first ) {
-    //   $output = $atts['first'] == 'first' ? $_COOKIE['first_name'] : '';
-    //   return $output;
-    // }
+    function user_details( $first ) {
+      $output = $atts['first'] == 'first' ? $_COOKIE['first_name'] : '';
+      return $output;
+    }
 
     /**
      * Read data from database
@@ -112,17 +121,27 @@
 
      if(isset($_SESSION) && isset($_SESSION['UserID'])) {
 
-
        // READ
        try {
            $results = $db->query("SELECT mediaid, title, year, plot, posterURL, director, genre, media_type FROM media WHERE userID = " . $_SESSION['UserID'] . " ORDER BY mediaid DESC");
-       } catch (Exception $e){
+       } catch (PDOException $e){
            echo "Data could not be retrieved from the database.";
            exit;
        }
 
-       $mediaList = ($results->fetchAll(PDO::FETCH_ASSOC));
+       // EXAMPLE PDO connection
 
+      //  try {
+      //     $db = new PDO("mysql:host=localhost;dbname=media;port=3306","root","root");
+      //     $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+      //     $db->exec("SET NAMES 'utf8'");
+      //   } catch (PDOException $e) {
+      //     echo "Could not connect to database";
+      //     exit;
+      //   }
+
+       $mediaList = ($results->fetchAll(PDO::FETCH_ASSOC));
+      //  var_dump($results);
 
        // Set variable for users first name
       //  try {

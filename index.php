@@ -13,7 +13,7 @@
             print "<p class='error-message'>$errorMessage <span class='error-message-close'>X</span></p>";
         } ?>
 
-        <form class="media-submit-form" method="post" action="validate.php">
+        <form class="media-submit-form" method="POST" action="validate.php">
             <fieldset class="fieldset-add-title">
                 <div class="field-media-title">
                     <label class="label-media-title" for="media-title">Search for a movie title</label>

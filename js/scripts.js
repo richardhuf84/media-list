@@ -33,7 +33,7 @@ $(document).ready(function() {
 			// Populate suggestion item content
 			if(typeof data.Title !== 'undefined') {
 				var suggestionItemHTML = '';
-				suggestionItemHTML += '<img class="suggestion-poster" src=' + data.Poster + ' alt=' + data.Title + '>';
+				suggestionItemHTML += '<img class="suggestion-poster" src="' + data.Poster + '" alt="' + data.Title + '">';
 				suggestionItemHTML += '<h3 class="suggestion-title">' + data.Title + '</h3>';
 				suggestionItemHTML += '<p class="suggestion-year">' + data.Year + '</p>';
 				suggestionItemHTML += '<p class="suggestion-plot">' + data.Plot + '</p>';
