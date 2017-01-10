@@ -26,34 +26,15 @@
    */
 
 
-   // OLD CONNECTION
-  //  try {
-  //     $db = new PDO("mysql:host=localhost;dbname=media;port=3306","root","root");
-  //     $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-  //     $db->exec("SET NAMES 'utf8'");
-  //   } catch (PDOException $e) {
-  //     echo "Could not connect to database";
-  //     exit;
-  //   }
-
-  // NEW CONNECTION
-
-  DEFINE('DB_USERNAME', 'root');
-  DEFINE('DB_PASSWORD', 'root');
-  DEFINE('DB_HOST', 'localhost');
-  DEFINE('DB_DATABASE', 'performance_schema');
-
-  $mysqli = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
-
-  if (mysqli_connect_error()) {
-    die('Connect Error ('.mysqli_connect_errno().') '.mysqli_connect_error());
-  }
-
-  $mysqli->close();
-
-  // http://www.phptherightway.com/#databases_interacting
-  $db = new PDO('mysql:host=localhost;dbname=media;port=8888;', 'root', 'root');
-
+   // Try to connect to the database
+   try {
+       $db = new PDO("mysql:host=localhost;dbname=media;port=8888","root","root");
+       $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+       $db->exec("SET NAMES 'utf8'");
+   } catch (Exception $e) {
+       echo "Could not connect to database";
+       exit;
+   }
 
 
  /**

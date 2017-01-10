@@ -4,7 +4,6 @@
   // validate.php performs form validation and CRUD operations, then redirects back to index.php
 
   if ($_SERVER["REQUEST_METHOD"] == 'POST') {
-    die;
     /**
      *
      * CREATE
