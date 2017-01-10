@@ -1,11 +1,10 @@
 <?php
-
   include_once('includes/config.php');
 
   // validate.php performs form validation and CRUD operations, then redirects back to index.php
 
   if ($_SERVER["REQUEST_METHOD"] == 'POST') {
-    echo 'test';
+    die;
     /**
      *
      * CREATE
@@ -15,7 +14,7 @@
 
     // Check for imdbid
 
-    var_dump($_POST)
+    // var_dump($_POST)
     if (isset($_POST['media-imdbid'])) {
 
         $mediaIMDBID = trim($_POST['media-imdbid']);
