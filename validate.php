@@ -1,9 +1,11 @@
 <?php
+
   include_once('includes/config.php');
 
-  // validate.php performs form validation and CRUD operations, then redirects back to index.php
+  // validate.php performs form validation, then redirects back to index.php
 
   if ($_SERVER["REQUEST_METHOD"] == 'POST') {
+
     /**
      *
      * CREATE
@@ -12,9 +14,7 @@
      */
 
     // Check for imdbid
-
-    // var_dump($_POST)
-    if (isset($_POST['media-imdbid'])) {
+    if ($_POST['media-imdbid']) {
 
         $mediaIMDBID = trim($_POST['media-imdbid']);
         $mediaIMDBID = filter_var($mediaIMDBID, FILTER_SANITIZE_STRING);
@@ -104,110 +104,57 @@
             }
         }
     }
-  //
-  //   // Delete entry
-  //
-  //   // DELETE
-  //   if(isset($_POST['update']) && $_POST['update']  == 'delete') {
-  //       foreach($_POST['delete'] as $key => $value) {
-  //           $sqlDelete = "DELETE from media WHERE mediaid = $key";
-  //           $db->exec($sqlDelete);
-  //
-  //           header("Location: index.php");
-  //           exit;
-  //       }
-  //   }
-  //
-  // //   // Register User
-  // //
-  // //   if(!empty($_POST['email']) && !empty($_POST['password'])) {
-  // //     global $firstName  = $_POST['first-name'];
-  // //     global $lastName   = $_POST['last-name'];
-  // //     global $email      = $_POST['email'];
-  // //     $password   = $_POST['password'];
-  // //     $password   = password_hash($password, PASSWORD_DEFAULT);
-  // //
-  // //     // Check if email already exists in database
-  // //     try {
-  // //         $checkEmailExists = $db->query("SELECT * FROM users WHERE Email = '" . $email . "'");
-  // //     } catch (Exception $e){
-  // //         echo "Data could not be retrieved from the database.";
-  // //         exit;
-  // //     }
-  // //
-  // //     //var_dump($checkEmailExists);
-  // //
-  // //     // if($checkEmailExists) == 1) {
-  // //     //   echo 'Email already exists';
-  // //     //   // redirect back to index.php
-  // //     //   // TODO set GET var to alert user that the email already exists in the database
-  // //     //   header("Location: index.php?registration=true&emailexists=true");
-  // //     //   exit;
-  // //     // }
-  // //
-  // //     $registerQuery = "INSERT INTO users(FirstName, LastName, Email, password) VALUES(
-  // //       '" . $firstName . "',
-  // //       '" . $lastName . "',
-  // //       '" . $email . "',
-  // //       '" . $password . "')";
-  // //     $db->exec($registerQuery);
-  // //
-  // //     // if($registerQuery) {
-  // //     //     // TODO set GET var to alert user that their registration is successful, and ask them to login
-  // //     //     header("Location: index.php?registered=true");
-  // //     //     exit;
-  // //     //
-  // //     //   // } else {
-  // //     //   // //  header("Location: register.php");
-  // //     //   // //  exit;
-  // //     //   }
-  // //     // }
-  // //
-  // //     // Send an email to tell the user that they have registered.
-  // //     // We use Gmail's SMTP server
-  // //     // $mail = new PHPMailer;
-  // //     //
-  // //     // //Enable SMTP debugging.
-  // //     // $mail->SMTPDebug = 3;
-  // //     // //Set PHPMailer to use SMTP.
-  // //     // $mail->isSMTP();
-  // //     // //Set SMTP host name
-  // //     // $mail->Host = "smtp.gmail.com";
-  // //     // //Set this to true if SMTP host requires authentication to send email
-  // //     // $mail->SMTPAuth = true;
-  // //     // //Provide username and password
-  // //     // $mail->Username = "richardhuf84@gmail.com";
-  // //     // $mail->Password = "messatsu";
-  // //     // //If SMTP requires TLS encryption then set it
-  // //     // $mail->SMTPSecure = "tls";
-  // //     // //Set TCP port to connect to
-  // //     // $mail->Port = 587;
-  // //     //
-  // //     // $mail->From = "richardhuf84@gmail.com";
-  // //     // $mail->FromName = "Media List";
-  // //     //
-  // //     // $mail->addAddress("richardhuf84@gmail.com", "Richard");
-  // //     //
-  // //     // $mail->isHTML(true);
-  // //     //
-  // //     // $mail->Subject = "Welcome to the Media List App!";
-  // //     // $mail->Body = "<i>Congratulations</i>";
-  // //     // $mail->AltBody = "This is the plain text version of the email content";
-  // //     //
-  // //     // if(!$mail->send()) {
-  // //     //     echo "Mailer Error: " . $mail->ErrorInfo;
-  // //     // } else {
-  // //     //     echo "Message has been sent successfully";
-  // //     // }
-  // //     //
-  // //     // if(!$mail->send()) {
-  // //     //     echo "Mailer Error: " . $mail->ErrorInfo;
-  // //     // } else {
-  // //     //     echo "Message has been sent successfully";
-  // //     // }
-  // //
-  //     header("Location: index.php");
-  //     exit;
-  // //
+
+    // Delete entry
+
+    // DELETE
+    if($_POST['update'] == 'delete') {
+        foreach($_POST['delete'] as $key => $value) {
+            $sqlDelete = "DELETE from media WHERE mediaid = $key";
+            $db->exec($sqlDelete);
+
+            header("Location: index.php");
+            exit;
+        }
+    }
+
+    // Register User
+
+    if(!empty($_POST['email']) && !empty($_POST['password'])) {
+      $firstName  = mysql_real_escape_string($_POST['first-name']);
+      $lastName   = mysql_real_escape_string($_POST['last-name']);
+      $email      = mysql_real_escape_string($_POST['email']);
+      $password   = $_POST['password'];
+      $password   = password_hash($password, PASSWORD_DEFAULT);
+      $checkemail = mysql_query("SELECT * FROM users WHERE Email = '" . $email . "'");
+
+      // if(mysql_num_rows($checkemail) == 1) {
+      //   // redirect back to index.php
+      //   // TODO set GET var to alert user that the email already exists in the database
+      //   header("Location: index.php");
+      //   exit;
+      // }
+
+      $registerQuery = "INSERT INTO users(FirstName, LastName, Email, password) VALUES(
+        '" . $firstName . "',
+        '" . $lastName . "',
+        '" . $email . "',
+        '" . $password . "')";
+      $db->exec($registerQuery);
+
+      // if($registerQuery) {
+      //     // TODO set GET var to alert user that their registration is successful, and ask them to login
+      //     header("Location: index.php?registered=true");
+      //     exit;
+      //
+      //   // } else {
+      //   // //  header("Location: register.php");
+      //   // //  exit;
+      //   }
+      // }
+
+      header("Location: index.php");
+      exit;
+
     }
   }
