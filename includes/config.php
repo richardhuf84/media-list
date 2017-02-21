@@ -52,16 +52,15 @@
   $password = $dbparts['pass'];
   $database = ltrim($dbparts['path'],'/');
 
-   try {
+  try {
     $db = new PDO("mysql:host=$hostname;dbname=$database", $username, $password);
     // set the PDO error mode to exception
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Connected successfully";
-    }
-catch(PDOException $e)
-    {
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  }
+  catch(PDOException $e)
+  {
     echo "Connection failed: " . $e->getMessage();
-    }
+  }
 
   // mysqli credentials
   // $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
