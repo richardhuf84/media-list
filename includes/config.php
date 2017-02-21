@@ -29,25 +29,23 @@
    // Try to connect to the database
    // NOTE LOCAL DB connection details.
    // replacing with live Heroku credentials
+  //  try {
+  //      $db = new PDO("mysql:host=localhost;dbname=media;port=8889","root","root");
+  //      $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+  //      $db->exec("SET NAMES 'utf8'");
+  //  } catch (Exception $e) {
+  //      echo "Could not connect to database";
+  //      exit;
+  //  }
 
   $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 
   $server = $url["host"];
   $username = $url["user"];
   $password = $url["pass"];
-  $dbname = substr($url["path"], 1);
+  $db = substr($url["path"], 1);
 
-  try {
-    // $db = new PDO("mysql:host=localhost;dbname=media;port=8889","root","root");
-    $db = new PDO("mysql:host=localhost;dbname=' . $dbname . ';", $username , $password);
-    $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-    $db->exec("SET NAMES 'utf8'");
-  } catch (Exception $e) {
-    echo "Could not connect to database";
-    exit;
-  }
-
-  // $conn = new mysqli($server, $username, $password, $db);
+  $conn = new mysqli($server, $username, $password, $db);
 
  /**
   * Global Functions
@@ -122,7 +120,7 @@
 
        // READ
        try {
-           $results = $db->query("SELECT mediaid, title, year, plot, posterURL, director, genre, media_type FROM media WHERE userID = " . $_SESSION['UserID'] . " ORDER BY mediaid DESC");
+           $results = $conn->query("SELECT mediaid, title, year, plot, posterURL, director, genre, media_type FROM media WHERE userID = " . $_SESSION['UserID'] . " ORDER BY mediaid DESC");
        } catch (PDOException $e){
            echo "Data could not be retrieved from the database.";
            exit;

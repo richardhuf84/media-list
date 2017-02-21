@@ -21,7 +21,7 @@ ini_set('display_errors', 'On');
 
       // // Lookup users table for email address and get password hash
       try {
-          $results = $db->query("SELECT * FROM users WHERE Email =  '" . $email . "'");
+          $results = $conn->query("SELECT * FROM users WHERE Email =  '" . $email . "'");
       } catch (Exception $e){
           echo "Your email could not be found in the database..";
           exit;
