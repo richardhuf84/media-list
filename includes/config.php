@@ -35,14 +35,33 @@
   // Try to connect to the database
   // NOTE LOCAL DB connection details.
   // replacing with live Heroku credentials
+  //  try {
+  //      $db = new PDO("mysql://ridt9n0etccn6vn8:wo658pu7kfa7zrm7@qbct6vwi8q648mrn.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/aq8ja62p0ho96ifa","ridt9n0etccn6vn8","wo658pu7kfa7zrm7");
+  //      $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+  //      $db->exec("SET NAMES 'utf8'");
+  //  } catch (Exception $e) {
+  //      echo "Could not connect to database";
+  //      exit;
+  //  }
+
+  $url = getenv('JAWSDB_URL');
+  $dbparts = parse_url($url);
+
+  $hostname = $dbparts['host'];
+  $username = $dbparts['user'];
+  $password = $dbparts['pass'];
+  $database = ltrim($dbparts['path'],'/');
+
    try {
-       $db = new PDO("mysql://ridt9n0etccn6vn8:wo658pu7kfa7zrm7@qbct6vwi8q648mrn.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/aq8ja62p0ho96ifa","ridt9n0etccn6vn8","wo658pu7kfa7zrm7");
-       $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-       $db->exec("SET NAMES 'utf8'");
-   } catch (Exception $e) {
-       echo "Could not connect to database";
-       exit;
-   }
+    $db = new PDO("mysql:host=$hostname;dbname=$database", $username, $password);
+    // set the PDO error mode to exception
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    echo "Connected successfully";
+    }
+catch(PDOException $e)
+    {
+    echo "Connection failed: " . $e->getMessage();
+    }
 
   // mysqli credentials
   // $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
