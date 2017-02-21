@@ -39,7 +39,7 @@
 
   try {
     // $db = new PDO("mysql:host=localhost;dbname=media;port=8889","root","root");
-    $db = new PDO("mysql:host=' . $server . ';dbname=' . $dbname . ';", $username , $password);
+    $db = new PDO("mysql:host=localhost;dbname=' . $dbname . ';", $username , $password);
     $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
     $db->exec("SET NAMES 'utf8'");
   } catch (Exception $e) {
