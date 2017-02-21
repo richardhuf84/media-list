@@ -21,7 +21,7 @@
 
         // Query to see if imdbid exists in the database
         try {
-            $results = $conn->query("SELECT imdbid FROM media");
+            $results = $db->query("SELECT imdbid FROM media");
         } catch (Exception $e){
             echo "Data could not be retrieved from the database.";
             exit;
@@ -95,7 +95,7 @@
                         '" . $mediaDirector . "',
                         '" . $mediaGenre . "',
                         '" . $mediaType . "')";
-                    $conn->exec($sqlInsert);
+                    $db->exec($sqlInsert);
                 }
 
                 header("Location: index.php");
@@ -111,7 +111,7 @@
     if($_POST['update'] == 'delete') {
         foreach($_POST['delete'] as $key => $value) {
             $sqlDelete = "DELETE from media WHERE mediaid = $key";
-            $conn->exec($sqlDelete);
+            $db->exec($sqlDelete);
 
             header("Location: index.php");
             exit;
@@ -140,7 +140,7 @@
         '" . $lastName . "',
         '" . $email . "',
         '" . $password . "')";
-      $conn->exec($registerQuery);
+      $db->exec($registerQuery);
 
       // if($registerQuery) {
       //     // TODO set GET var to alert user that their registration is successful, and ask them to login

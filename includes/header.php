@@ -18,7 +18,7 @@
     <!-- <link rel="shortcut icon" sizes="16x16 24x24 32x32 48x48 64x64" href="favicon.ico"> -->
 
     <!-- Open Sans -->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
 
     <!-- Normalise -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css" rel="stylesheet" type="text/css">
