@@ -29,23 +29,25 @@
    // Try to connect to the database
    // NOTE LOCAL DB connection details.
    // replacing with live Heroku credentials
-  //  try {
-  //      $db = new PDO("mysql:host=localhost;dbname=media;port=8889","root","root");
-  //      $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-  //      $db->exec("SET NAMES 'utf8'");
-  //  } catch (Exception $e) {
-  //      echo "Could not connect to database";
-  //      exit;
-  //  }
 
   $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 
   $server = $url["host"];
   $username = $url["user"];
   $password = $url["pass"];
-  $db = substr($url["path"], 1);
+  $dbname = substr($url["path"], 1);
 
-  $conn = new mysqli($server, $username, $password, $db);
+  try {
+    // $db = new PDO("mysql:host=localhost;dbname=media;port=8889","root","root");
+    $db = new PDO("mysql:host=' . $server . ';dbname=' . $dbname . ';", $username , $password);
+    $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+    $db->exec("SET NAMES 'utf8'");
+  } catch (Exception $e) {
+    echo "Could not connect to database";
+    exit;
+  }
+
+  // $conn = new mysqli($server, $username, $password, $db);
 
  /**
   * Global Functions
