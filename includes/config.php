@@ -26,26 +26,33 @@
    */
 
 
-   // Try to connect to the database
-   // NOTE LOCAL DB connection details.
-   // replacing with live Heroku credentials
-  //  try {
-  //      $db = new PDO("mysql:host=localhost;dbname=media;port=8889","root","root");
-  //      $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-  //      $db->exec("SET NAMES 'utf8'");
-  //  } catch (Exception $e) {
-  //      echo "Could not connect to database";
-  //      exit;
-  //  }
 
-  $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+  // JAWSDB
+  //////////////////////////////////////////////////////////////////////////////
 
-  $server = $url["host"];
-  $username = $url["user"];
-  $password = $url["pass"];
-  $db = substr($url["path"], 1);
+  mysql://ridt9n0etccn6vn8:wo658pu7kfa7zrm7@qbct6vwi8q648mrn.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/aq8ja62p0ho96ifa
 
-  $conn = new mysqli($server, $username, $password, $db);
+  // Try to connect to the database
+  // NOTE LOCAL DB connection details.
+  // replacing with live Heroku credentials
+   try {
+       $db = new PDO("mysql://ridt9n0etccn6vn8:wo658pu7kfa7zrm7@qbct6vwi8q648mrn.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/aq8ja62p0ho96ifa","ridt9n0etccn6vn8","wo658pu7kfa7zrm7");
+       $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+       $db->exec("SET NAMES 'utf8'");
+   } catch (Exception $e) {
+       echo "Could not connect to database";
+       exit;
+   }
+
+  // mysqli credentials
+  // $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+  //
+  // $server = $url["host"];
+  // $username = $url["user"];
+  // $password = $url["pass"];
+  // $db = substr($url["path"], 1);
+  //
+  // $conn = new mysqli($server, $username, $password, $db);
 
  /**
   * Global Functions
@@ -120,7 +127,7 @@
 
        // READ
        try {
-           $results = $conn->query("SELECT mediaid, title, year, plot, posterURL, director, genre, media_type FROM media WHERE userID = " . $_SESSION['UserID'] . " ORDER BY mediaid DESC");
+           $results = $db->query("SELECT mediaid, title, year, plot, posterURL, director, genre, media_type FROM media WHERE userID = " . $_SESSION['UserID'] . " ORDER BY mediaid DESC");
        } catch (PDOException $e){
            echo "Data could not be retrieved from the database.";
            exit;
