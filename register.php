@@ -19,19 +19,19 @@
     <fieldset>
       <div class="input-wrap">
           <label for="first-name">First Name:</label>
-          <input type="text" name="first-name" id="first-name" value="Richard" />
+          <input type="text" name="first-name" id="first-name" value="" placeholder="John" />
       </div>
       <div class="input-wrap">
           <label for="last-name">Last Name:</label>
-          <input type="text" name="last-name" id="last-name" value="Huf" />
+          <input type="text" name="last-name" id="last-name" value="" placeholder="Smith" />
       </div>
       <div class="input-wrap">
           <label for="email">Email Address:</label>
-          <input type="text" name="email" id="email" value="richardhuf84@gmail.com" />
+          <input type="text" name="email" id="email" value="" placeholder="email@example.com" />
       </div>
       <div class="input-wrap">
           <label for="password">Password:</label>
-          <input type="password" name="password" id="password" value="12345" />
+          <input type="password" name="password" id="password" value="" />
       </div>
       <input type="submit" name="register" id="register" value="Register" />
     </fieldset>
