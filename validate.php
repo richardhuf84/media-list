@@ -14,7 +14,7 @@
      */
 
     // Check for imdbid
-    if ($_POST['media-imdbid']) {
+    if (isset($_POST['media-imdbid'])) {
 
         $mediaIMDBID = trim($_POST['media-imdbid']);
         $mediaIMDBID = filter_var($mediaIMDBID, FILTER_SANITIZE_STRING);
