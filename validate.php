@@ -127,14 +127,14 @@
       $password         = $_POST['password'];
       $password         = password_hash($password, PASSWORD_DEFAULT);
       $checkEmail       = "SELECT * FROM users WHERE Email = '" . $email . "'");
-      $checkEmailResult = $db->query($checkemail);
+      // $checkEmailResult = $db->query($checkemail);
 
-      if(mysql_num_rows($checkEmailResult) == 1) {
-        // redirect back to index.php
-        // TODO set GET var to alert user that the email already exists in the database
-        header("Location: index.php");
-        exit;
-      }
+      // if(mysql_num_rows($checkEmailResult) == 1) {
+      //   // redirect back to index.php
+      //   // TODO set GET var to alert user that the email already exists in the database
+      //   header("Location: index.php");
+      //   exit;
+      // }
 
       $registerQuery = "INSERT INTO users(FirstName, LastName, Email, password) VALUES(
         '" . $firstName . "',
@@ -143,16 +143,16 @@
         '" . $password . "')";
       $db->exec($registerQuery);
 
-      // if($registerQuery) {
-      //     // TODO set GET var to alert user that their registration is successful, and ask them to login
-      //     header("Location: index.php?registered=true");
-      //     exit;
-      //
-      //   // } else {
-      //   // //  header("Location: register.php");
-      //   // //  exit;
-      //   }
-      // }
+      if($registerQuery) {
+          // TODO set GET var to alert user that their registration is successful, and ask them to login
+          header("Location: index.php?registered=true");
+          exit;
+
+        } else {
+         header("Location: register.php");
+         exit;
+        }
+      }
 
       header("Location: index.php");
       exit;
