@@ -126,14 +126,15 @@
       $email      = htmlspecialchars($_POST['email']);
       $password   = $_POST['password'];
       $password   = password_hash($password, PASSWORD_DEFAULT);
-      $checkemail = mysql_query("SELECT * FROM users WHERE Email = '" . $email . "'");
+      $checkemail = "SELECT * FROM users WHERE Email = '" . $email . "'");
+      $db->query($checkemail);
 
-      // if(mysql_num_rows($checkemail) == 1) {
-      //   // redirect back to index.php
-      //   // TODO set GET var to alert user that the email already exists in the database
-      //   header("Location: index.php");
-      //   exit;
-      // }
+      if(mysql_num_rows($checkemail) == 1) {
+        // redirect back to index.php
+        // TODO set GET var to alert user that the email already exists in the database
+        header("Location: index.php");
+        exit;
+      }
 
       $registerQuery = "INSERT INTO users(FirstName, LastName, Email, password) VALUES(
         '" . $firstName . "',
