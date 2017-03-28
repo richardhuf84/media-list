@@ -108,7 +108,7 @@
     // Delete entry
 
     // DELETE
-    if($_POST['update'] == 'delete') {
+    if(isset($_POST['update']) && $_POST['update'] == 'delete') {
         foreach($_POST['delete'] as $key => $value) {
             $sqlDelete = "DELETE from media WHERE mediaid = $key";
             $db->exec($sqlDelete);
@@ -121,9 +121,9 @@
     // Register User
 
     if(!empty($_POST['email']) && !empty($_POST['password'])) {
-      $firstName  = mysql_real_escape_string($_POST['first-name']);
-      $lastName   = mysql_real_escape_string($_POST['last-name']);
-      $email      = mysql_real_escape_string($_POST['email']);
+      $firstName  = htmlspecialchars($_POST['first-name']);
+      $lastName   = htmlspecialchars($_POST['last-name']);
+      $email      = htmlspecialchars($_POST['email']);
       $password   = $_POST['password'];
       $password   = password_hash($password, PASSWORD_DEFAULT);
       $checkemail = mysql_query("SELECT * FROM users WHERE Email = '" . $email . "'");
