@@ -121,15 +121,15 @@
     // Register User
 
     if(!empty($_POST['email']) && !empty($_POST['password'])) {
-      $firstName  = htmlspecialchars($_POST['first-name']);
-      $lastName   = htmlspecialchars($_POST['last-name']);
-      $email      = htmlspecialchars($_POST['email']);
-      $password   = $_POST['password'];
-      $password   = password_hash($password, PASSWORD_DEFAULT);
-      $checkemail = "SELECT * FROM users WHERE Email = '" . $email . "'");
-      $db->query($checkemail);
+      $firstName        = htmlspecialchars($_POST['first-name']);
+      $lastName         = htmlspecialchars($_POST['last-name']);
+      $email            = htmlspecialchars($_POST['email']);
+      $password         = $_POST['password'];
+      $password         = password_hash($password, PASSWORD_DEFAULT);
+      $checkEmail       = "SELECT * FROM users WHERE Email = '" . $email . "'");
+      $checkEmailResult = $db->query($checkemail);
 
-      if(mysql_num_rows($checkemail) == 1) {
+      if(mysql_num_rows($checkEmailResult) == 1) {
         // redirect back to index.php
         // TODO set GET var to alert user that the email already exists in the database
         header("Location: index.php");
