@@ -61,10 +61,10 @@
           <form method="POST" action="login.php" name="loginform" id="loginform">
           <fieldset>
               <div class="input-wrap">
-                <label for="email">Email:</label><input type="text" name="email" id="email" value="richardhuf84@gmail.com" placeholder="Email Address" autofocus />
+                <label for="email">Email:</label><input type="text" name="email" id="email" value="" placeholder="Email Address" autofocus />
               </div>
               <div class="input-wrap">
-              <label for="password">Password:</label><input type="password" name="password" id="password" value="ric123" placeholder="Your password" />
+              <label for="password">Password:</label><input type="password" name="password" id="password" value="" placeholder="Your password" />
               <div class="input-wrap">
                 <label for="keep-logged-in"><input type="checkbox" id="keep-logged-in" name="keep_logged_in">Keep me logged in</label>
               </div>
