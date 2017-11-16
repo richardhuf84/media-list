@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
     <!-- Main stylesheet -->
-    <link href='css/build/style.css' rel='stylesheet' type='text/css'>
+    <link href='/dist/css/style.css' rel='stylesheet' type='text/css'>
 
     <script src="js/libs/jquery-2.1.0.min.js"></script>
 

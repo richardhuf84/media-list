@@ -1,27 +1,33 @@
--- phpMyAdmin SQL Dump
--- version 4.4.1.1
--- http://www.phpmyadmin.net
---
--- Host: localhost
--- Generation Time: Dec 13, 2015 at 09:25 AM
--- Server version: 5.5.42
--- PHP Version: 5.6.7
+# ************************************************************
+# Sequel Pro SQL dump
+# Version 4135
+#
+# http://www.sequelpro.com/
+# http://code.google.com/p/sequel-pro/
+#
+# Host: localhost (MySQL 5.5.42)
+# Database: media
+# Generation Time: 2017-11-16 13:22:23 +0000
+# ************************************************************
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
 
---
--- Database: `media`
---
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `media`
---
+# Dump of table media
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `media`;
 
 CREATE TABLE `media` (
-  `id` int(11) NOT NULL,
+  `mediaid` int(11) NOT NULL AUTO_INCREMENT,
+  `userid` int(255) NOT NULL COMMENT 'User id',
   `imdbid` text NOT NULL,
   `title` text NOT NULL,
   `year` int(11) NOT NULL,
@@ -29,34 +35,53 @@ CREATE TABLE `media` (
   `posterURL` text NOT NULL COMMENT 'URL to the movie poster on IMDB',
   `director` text NOT NULL,
   `genre` text NOT NULL,
-  `media_type` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+  `media_type` text NOT NULL,
+  PRIMARY KEY (`mediaid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `media`
---
+LOCK TABLES `media` WRITE;
+/*!40000 ALTER TABLE `media` DISABLE KEYS */;
 
-INSERT INTO `media` (`id`, `imdbid`, `title`, `year`, `plot`, `posterURL`, `director`, `genre`, `media_type`) VALUES
-(6, 'tt0246578', 'Donnie Darko', 2001, 'A troubled teenager is plagued by visions of a large bunny rabbit that manipulates him to commit a series of crimes, after narrowly escaping a bizarre accident.', 'http://ia.media-imdb.com/images/M/MV5BMTczMzE4Nzk3N15BMl5BanBnXkFtZTcwNDg5Mjc4NA@@._V1_SX300.jpg', 'Richard Kelly', 'Drama, Sci-Fi', 'dvd'),
-(7, 'tt0137523', 'Fight Club', 1999, 'An insomniac office worker, looking for a way to change his life, crosses paths with a devil-may-care soap maker, forming an underground fight club that evolves into something much, much more...', 'http://ia.media-imdb.com/images/M/MV5BMjIwNTYzMzE1M15BMl5BanBnXkFtZTcwOTE5Mzg3OA@@._V1_SX300.jpg', 'David Fincher', 'Drama', 'dvd'),
-(12, 'tt0286716', 'Hulk', 2003, 'Bruce Banner, a genetics researcher with a tragic past, suffers an accident that causes him to transform into a raging green monster when he gets angry.', 'http://ia.media-imdb.com/images/M/MV5BMTQxNzUxNTE4Nl5BMl5BanBnXkFtZTYwMjcyNTk5._V1_SX300.jpg', 'Ang Lee', 'Action, Sci-Fi', 'dvd');
+INSERT INTO `media` (`mediaid`, `userid`, `imdbid`, `title`, `year`, `plot`, `posterURL`, `director`, `genre`, `media_type`)
+VALUES
+	(1,0,'0133093','The Matrix',1999,'Stuff happens.','http://www.imdb.com/media/rm461886464/tt0133093?ref_=tt_ov_i','fdgfg','Action','DVD'),
+	(9,41,'tt0286716','Hulk',2003,'Bruce Banner, a genetics researcher with a tragic past, suffers an accident that causes him to transform into a raging green monster when he gets angry.','https://images-na.ssl-images-amazon.com/images/M/MV5BMTQxNzUxNTE4Nl5BMl5BanBnXkFtZTYwMjcyNTk5._V1_SX300.jpg','Ang Lee','Action, Sci-Fi','dvd'),
+	(10,41,'tt0133093','The Matrix',1999,'A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.','https://images-na.ssl-images-amazon.com/images/M/MV5BMDMyMmQ5YzgtYWMxOC00OTU0LWIwZjEtZWUwYTY5MjVkZjhhXkEyXkFqcGdeQXVyNDYyMDk5MTU@._V1_SX300.jpg','Lana Wachowski, Lilly Wachowski','Action, Sci-Fi','bluray');
 
---
--- Indexes for dumped tables
---
+/*!40000 ALTER TABLE `media` ENABLE KEYS */;
+UNLOCK TABLES;
 
---
--- Indexes for table `media`
---
-ALTER TABLE `media`
-  ADD PRIMARY KEY (`id`);
 
---
--- AUTO_INCREMENT for dumped tables
---
+# Dump of table users
+# ------------------------------------------------------------
 
---
--- AUTO_INCREMENT for table `media`
---
-ALTER TABLE `media`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+DROP TABLE IF EXISTS `users`;
+
+CREATE TABLE `users` (
+  `UserID` int(11) NOT NULL AUTO_INCREMENT,
+  `FirstName` varchar(255) NOT NULL COMMENT 'Users First Name',
+  `LastName` varchar(255) NOT NULL COMMENT 'Users Last Name',
+  `Email` varchar(255) NOT NULL COMMENT 'User email address',
+  `Password` varchar(255) NOT NULL DEFAULT '' COMMENT 'User Password',
+  `KeepLoggedIn` tinyint(1) NOT NULL,
+  PRIMARY KEY (`UserID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+
+INSERT INTO `users` (`UserID`, `FirstName`, `LastName`, `Email`, `Password`, `KeepLoggedIn`)
+VALUES
+	(41,'user1','','user1@example.com','$2y$10$D9S.6GSFH5OwtVlV8bBlLO/.wiSHHgXZXy3o7qy/AkfsP1nepbTwO',0);
+
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
